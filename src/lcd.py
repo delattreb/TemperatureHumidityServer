@@ -4,10 +4,9 @@ Auteur: Bruno DELATTRE
 Date : 13/11/2016
 """
 
-import datetime
-import time
 import sqlite3
-from lib import com_config, com_dht22, com_ds18b20, com_gps, com_network, com_ssd1306, com_logger
+import time
+from lib import com_config, com_dht22, com_ds18b20, com_gps, com_logger, com_network, com_ssd1306
 
 
 class LCD:

@@ -4,9 +4,10 @@ Auteur: Bruno DELATTRE
 Date : 07/08/2016
 """
 
-import threading, lcd, time
-from acquisition import thread_acquisition_camera, thread_acquisition_dht22, thread_acquisition_ds18b20, thread_acquisition_gps
+import threading
+import lcd
 from lib import com_config, com_gpio_inout, com_logger
+from acquisition import thread_acquisition_dht22, thread_acquisition_ds18b20
 
 # Config
 com_config.setConfig()
