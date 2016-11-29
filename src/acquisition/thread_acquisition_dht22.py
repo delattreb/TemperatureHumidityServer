@@ -8,28 +8,27 @@ import sqlite3
 import threading
 import time
 
-from lib import com_config, com_dht22, com_logger
+from lib import com_config, com_dht22, com_logger, com_ssd1306
 
 
 class ThreadAcquisitionDHT22(threading.Thread):
-    def __init__(self, name, lock, port, delay, counter):
+    def __init__(self, name, lock, port, delay):
         super().__init__()
         
         self.name = name
         self.port = port
-        self.counter = counter
         self.delay = delay
         self.lock = lock
     
     def run(self):
         logger = com_logger.Logger('DHT22:' + self.name)
         logger.info('Start')
-        self.getTempHum(self.delay, self.counter)
+        self.getTempHum(self.delay)
         logger.info('Stop')
     
-    def getTempHum(self, delay, counter):
+    def getTempHum(self, delay):
         instance = com_dht22.DHT22(self.port, self.name)
-        while counter:
+        while True:
             self.lock.acquire()
             
             config = com_config.getConfig()
@@ -38,7 +37,11 @@ class ThreadAcquisitionDHT22(threading.Thread):
             
             instance.set(connection, cursor)
             
-            self.lock.release()
+            # LC display
+            lcd = com_ssd1306.SSD1306()
+            lcd.text(1, 5, 'Temp: ' + str(instance.temperature()) + '°C', 2)
+            lcd.text(1, 20, 'Hum: ' + str(instance.humidity()) + '%', 2)
             
-            counter -= 1
+            self.lock.release()
+
             time.sleep(delay)

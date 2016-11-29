@@ -43,7 +43,6 @@ def setConfig():
     # DHT22
     config['GPIO']['DHT22_INTERIOR_PORT'] = '5'
     config['GPIO']['DHT22_INTERIOR_delay'] = '10'
-    config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionDuration * 3600) / float(config['GPIO']['DHT22_INTERIOR_delay']))))
     
     # DS18B20
     config['GPIO']['DS18B20_1'] = '/sys/bus/w1/devices/w1_bus_master1/28-0416618c01ff/w1_slave'
