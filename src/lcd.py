@@ -6,6 +6,7 @@ Date : 13/11/2016
 
 import sqlite3
 import time
+
 from lib import com_config, com_dht22, com_ds18b20, com_gps, com_logger, com_network, com_ssd1306
 
 
@@ -19,8 +20,7 @@ class LCD:
     def displayOff(self):
         self.lcd.offscreen()
     
-    def splash(self):
-        splashDuration = 2
+    def splash(self, duration):
         self.lcd.clear()
         self.lcd.rectangle(0, 0, self.lcd.width_max - 1, self.lcd.height_max - 1)
         self.lcd.text(4, 1, self.config['APPLICATION']['name'], 2)
@@ -28,7 +28,7 @@ class LCD:
         self.lcd.text(4, 49, self.config['APPLICATION']['author'], 0)
         
         self.lcd.display()
-        time.sleep(splashDuration)
+        time.sleep(duration)
     
     def displatSensor(self):
         config = com_config.getConfig()

@@ -16,9 +16,10 @@ def setConfig():
     # region Config
     # Version
     config['APPLICATION'] = {}
-    config['APPLICATION']['name'] = 'Strato Balloon'
-    config['APPLICATION']['version'] = '1.3.0'
+    config['APPLICATION']['name'] = 'Temp & Hum'
+    config['APPLICATION']['version'] = '1.0.0'
     config['APPLICATION']['author'] = '© Bruno DELATTRE'
+    config['APPLICATION']['splashduration'] = '5'
     
     # Acquisition
     config['ACQUISITION'] = {}

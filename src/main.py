@@ -21,7 +21,7 @@ logger.info('Application start')
 lcd = lcd.LCD()
 
 # LCD Splash
-lcd.splash()
+lcd.splash(int(config['APPLICATION']['splashduration']))
 
 gpioinout = com_gpio_inout.GPIOINOT()
 gpioinout.blink(0.2, 10)
