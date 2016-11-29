@@ -20,10 +20,11 @@ def setConfig():
     config['APPLICATION']['version'] = '1.0.0'
     config['APPLICATION']['author'] = '© Bruno DELATTRE'
     config['APPLICATION']['splashduration'] = '5'
-    
+    config['APPLICATION']['refreshsensor'] = '5'
+
     # Acquisition
     config['ACQUISITION'] = {}
-    config['ACQUISITION']['trigger'] = '20'
+    config['ACQUISITION']['trigger'] = '10'
     
     # LOGGER
     config['LOGGER'] = {}
@@ -31,14 +32,14 @@ def setConfig():
     config['LOGGER']['levelfile'] = '20'
     config['LOGGER']['logfile'] = 'log'
     config['LOGGER']['logfilesize'] = '1000000'
-
+    
     # SQLite
     config['SQLITE'] = {}
     config['SQLITE']['database'] = 'database.db'
     
-       # GPIO
+    # GPIO
     config['GPIO'] = {}
-  
+    
     # DHT22
     config['GPIO']['DHT22_INTERIOR_PORT'] = '5'
     config['GPIO']['DHT22_INTERIOR_delay'] = '10'

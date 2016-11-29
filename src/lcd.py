@@ -45,10 +45,9 @@ class LCD:
         # DS18B20
         ds18b20 = com_ds18b20.DS18B20()
         self.lcd.text(1, 11, 'DS18B20 Int: ' + str(ds18b20.read('DS18B20 Interior', self.config['GPIO']['DS18B20_1'], connection, cursor, False)) + '°C', 0)
-        # self.lcd.text(1, 21, 'DS18B20 Ext: ' + str(ds18b20.read('DS18B20 Exterior', self.config['GPIO']['DS18B20_2'])) + '°C', 0)
         
         self.lcd.display()
-        time.sleep(3)
+        time.sleep(int(config['APPLICATION']['refreshsensor']))
     
     def displayStartAcquisition(self):
         logger = com_logger.Logger()
