@@ -30,7 +30,7 @@ class LCD:
         self.lcd.display()
         time.sleep(duration)
     
-    def displatSensor(self):
+    def displaySensor(self):
         config = com_config.getConfig()
         connection = sqlite3.Connection(config['SQLITE']['database'])
         cursor = connection.cursor()
