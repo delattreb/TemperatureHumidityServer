@@ -8,40 +8,38 @@ import sqlite3
 import threading
 import time
 
-from lib import com_config, com_dht22, com_logger, com_ssd1306
+from lib import com_config, com_dht22, com_logger
 
 
 class ThreadAcquisitionDHT22(threading.Thread):
-    def __init__(self, name, lock, port, delay):
+    def __init__(self, name, lock, port, delay, counter):
         super().__init__()
-        
+        conf = com_config.Config()
+        config = conf.getconfig()
         self.name = name
         self.port = port
+        self.counter = counter
         self.delay = delay
         self.lock = lock
+        self.database = config['SQLITE']['database']
     
     def run(self):
         logger = com_logger.Logger('DHT22:' + self.name)
         logger.info('Start')
-        self.getTempHum(self.delay)
+        self.gettemphum(self.delay, self.counter)
         logger.info('Stop')
-    
-    def getTempHum(self, delay):
+
+    def gettemphum(self, delay, counter):
         instance = com_dht22.DHT22(self.port, self.name)
-        while True:
+        while counter:
             self.lock.acquire()
             
-            config = com_config.getConfig()
-            connection = sqlite3.Connection(config['SQLITE']['database'])
+            connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
             
             instance.set(connection, cursor)
             
-            # LC display
-            lcd = com_ssd1306.SSD1306()
-            lcd.text(1, 5, 'Temp: ' + str(instance.temperature()) + '°C', 2)
-            lcd.text(1, 20, 'Hum: ' + str(instance.humidity()) + '%', 2)
-            
             self.lock.release()
-
+            
+            counter -= 1
             time.sleep(delay)
