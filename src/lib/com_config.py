@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 com_config.py v 1.0.2
 Auteur: Bruno DELATTRE
@@ -22,7 +23,7 @@ class Config:
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'TemperatureHumidity'
         self.config['APPLICATION']['version'] = '1.0.0'
-        self.config['APPLICATION']['author'] = '© Bruno DELATTRE'
+        self.config['APPLICATION']['author'] = u'\u00A9' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
         
         # WEBServices

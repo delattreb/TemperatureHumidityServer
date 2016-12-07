@@ -13,7 +13,7 @@ class ClientWebServices:
         config = conf.getconfig()
         self.url = config['WEBSERVICES']['url']
         
-        self.logger = com_logger.Logger()
+        self.logger = com_logger.Logger('Cleint WS')
     
     def print_result(self, jsonwsp_resp):
         if jsonwsp_resp.status == 200:
@@ -26,11 +26,19 @@ class ClientWebServices:
             self.logger.error(jsonwsp_resp.response_body)
     
     def getcalculator(self, ):
-        calc_client = JSONWSPClient(self.url + '/Calculator/jsonwsp/description')
-        jsonwsp_resp = calc_client.add(a = 25, b = 1)
-        self.print_result(jsonwsp_resp)
+        try:
+            calc_client = JSONWSPClient(self.url + '/Calculator/jsonwsp/description')
+            jsonwsp_resp = calc_client.add(a = 25, b = 1)
+            self.print_result(jsonwsp_resp)
+            self.logger.debug('Call WS getcalculator')
+        except Exception as exp:
+            self.logger.error(repr(exp))
     
     def getmysql(self, ):
-        calc_client = JSONWSPClient(self.url + '/MySQL/jsonwsp/description')
-        jsonwsp_resp = calc_client.add(a = 16, b = 2)
-        self.print_result(jsonwsp_resp)
+        try:
+            calc_client = JSONWSPClient(self.url + '/MySQL/jsonwsp/description')
+            jsonwsp_resp = calc_client.add(a = 16, b = 2)
+            self.print_result(jsonwsp_resp)
+            self.logger.debug('Call WS getmysql')
+        except Exception as exp:
+            self.logger.error(repr(exp))
