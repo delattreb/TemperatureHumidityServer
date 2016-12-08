@@ -30,9 +30,14 @@ class ClientWebServices:
             calc_client = JSONWSPClient(self.url + '/InfoService/jsonwsp/description')
             jsonwsp_resp = calc_client.getversion()
             self.print_result(jsonwsp_resp)
-            self.logger.debug('Call WS getcalculator')
+            self.logger.debug('Call WS getversion')
         except Exception as exp:
             self.logger.error(repr(exp))
+    
+    def getlistAlbums(self):
+        calc_client = JSONWSPClient(self.url + '/AlbumService/jsonwsp/description')
+        jsonwsp_resp = calc_client.listAlbums(search_frase = 'Bowie')
+        self.print_result(jsonwsp_resp)
     
     def getcalculator(self):
         try:

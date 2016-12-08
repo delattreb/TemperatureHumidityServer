@@ -33,7 +33,7 @@ class SQLiteService(object):
             cursor = connection.cursor()
             
             dal = dal_dht22.DAL_DHT22(connection, cursor)
-            dal.set_dht22('DGT22', str(temp), str(hum))
+            dal.set_dht22('DHT22', str(temp), str(hum))
             
             self.logger.debug('Insert: ' + str(temp) + ' ' + str(hum))
             return 0
