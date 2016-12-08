@@ -29,8 +29,8 @@ class ClientWebServices:
         try:
             calc_client = JSONWSPClient(self.url + '/InfoService/jsonwsp/description')
             jsonwsp_resp = calc_client.getversion()
-            self.print_result(jsonwsp_resp)
             self.logger.debug('Call WS getversion')
+            self.logger.debug(jsonwsp_resp.response_dict['result'][0]['version'])
         except Exception as exp:
             self.logger.error(repr(exp))
     

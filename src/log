@@ -1,1 +1,12 @@
 07/12/2016 21:30:51 WARNING : GPIO - GPIO not present
+08/12/2016 21:01:29 ERROR : Cleint WS - TypeError('placeholder() takes 1 positional argument but 2 were given',)
+08/12/2016 21:04:12 ERROR : Cleint WS - TypeError('placeholder() takes 1 positional argument but 2 were given',)
+08/12/2016 21:08:52 ERROR : Cleint WS - TypeError('placeholder() takes 1 positional argument but 2 were given',)
+08/12/2016 21:11:26 ERROR : Cleint WS - ConnectionRefusedError(10061, 'Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée', None, 10061, None)
+08/12/2016 21:19:31 ERROR : Cleint WS - AttributeError("'JSONWSPResponse' object has no attribute 'readall'",)
+08/12/2016 21:20:22 ERROR : Cleint WS - AttributeError("'dict' object has no attribute 'decode'",)
+08/12/2016 21:20:25 ERROR : Cleint WS - AttributeError("'dict' object has no attribute 'decode'",)
+08/12/2016 21:21:01 ERROR : Cleint WS - TypeError("the JSON object must be str, not 'dict'",)
+08/12/2016 21:21:41 ERROR : Cleint WS - TypeError("the JSON object must be str, not 'list'",)
+08/12/2016 21:22:32 ERROR : Cleint WS - TypeError("the JSON object must be str, not 'dict'",)
+08/12/2016 21:29:07 ERROR : Cleint WS - TypeError("load() missing 1 required positional argument: 'fp'",)

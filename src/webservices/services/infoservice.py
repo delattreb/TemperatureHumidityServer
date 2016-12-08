@@ -11,11 +11,9 @@ from ladon.types.ladontype import LadonType
 from lib import com_config
 
 
-# @ladonize(PORTABLE_STRING, rtype = [Album])
-# def listAlbums(self, search_frase = PORTABLE_STRING('')):
-
-
 class Version(LadonType):
+    name = PORTABLE_STRING
+    description = PORTABLE_STRING
     version = PORTABLE_STRING
 
 
@@ -26,6 +24,23 @@ class InfoService(object):
     
     @ladonize(rtype = [Version])
     def getversion(self):
+        version = []
         v = Version()
-        v.version = self.config['WEBSERVICES']['name']
-        return v
+        v.name = self.config['WEBSERVICES']['name']
+        v.description = self.config['WEBSERVICES']['description']
+        v.version = self.config['WEBSERVICES']['version']
+        version += [v]
+        return version
+
+"""
+    @ladonize(PORTABLE_STRING, rtype = [Version])
+    def getversion(self, search_frase = PORTABLE_STRING('')):
+        version = []
+        v = Version()
+        v.name = self.config['WEBSERVICES']['name']
+        v.description = self.config['WEBSERVICES']['description']
+        v.version = self.config['WEBSERVICES']['version']
+        version += [v]
+        return version
+
+"""

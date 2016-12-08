@@ -14,6 +14,7 @@ conf.setconfig()
 
 
 client = clientwebservices.ClientWebServices()
-client.getlistAlbums()
+client.getversion()
+
 
 

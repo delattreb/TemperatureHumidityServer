@@ -13,6 +13,7 @@ f.close()
 
 class Band(LadonType):
     def __init__(self):
+        super().__init__()
         self.name = 'bla'
     
     name = PORTABLE_STRING
@@ -20,7 +21,6 @@ class Band(LadonType):
 
 
 class Album(LadonType):
-    band = Band
     title = PORTABLE_STRING
     songs = [PORTABLE_STRING]
 
