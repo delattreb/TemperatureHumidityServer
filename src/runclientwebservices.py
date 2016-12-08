@@ -16,8 +16,4 @@ conf.setconfig()
 client = clientwebservices.ClientWebServices()
 client.getlistAlbums()
 
-"""
-client.getcalculator()
-temp, hum = client.gettemphum()
-client.inserttemphum(temp, hum)
-"""
+
