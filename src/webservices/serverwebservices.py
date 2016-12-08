@@ -25,7 +25,7 @@ class ServerWebServices:
         self.logger.info('Services are running on port %(port)s.' % {'port': port})
         # Set list of WebServices
         scriptdir = dirname(abspath(__file__))
-        service_modules = ['calculatorservice', 'mysqlservice', 'sqliteservice']
+        service_modules = ['infoservice', 'calculatorservice', 'sqliteservice', 'dht22service']
         application = LadonWSGIApplication(service_modules, [join(scriptdir, 'services')], catalog_name = self.config['WEBSERVICES']['name'],
                                            catalog_desc = self.config['WEBSERVICES']['description'], logging = 31)
         server = wsgiref.simple_server.make_server('', port, application)
