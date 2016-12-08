@@ -28,8 +28,15 @@ class Config:
         
         # WEBServices
         self.config['WEBSERVICES'] = {}
+        self.config['WEBSERVICES']['name'] = 'NAS WebServices'
+        self.config['WEBSERVICES']['description'] = 'NAS WebServices'
+        self.config['WEBSERVICES']['version'] = '1.1.0'
         self.config['WEBSERVICES']['port'] = '9090'
         self.config['WEBSERVICES']['url'] = 'http://192.168.1.15:' + self.config['WEBSERVICES']['port']
+        self.config['WEBSERVICES']['logfile'] = 'webservices.log'
+        self.config['WEBSERVICES']['logfilesize'] = '50000'
+        self.config['WEBSERVICES']['logbackupcount'] = '50'
+        self.config['WEBSERVICES']['loglevel'] = '4'
         
         # Acquisition
         self.config['ACQUISITION'] = {}

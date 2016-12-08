@@ -37,7 +37,7 @@ class DHT22:
                      |
     port ------------+
     """
-
+    
     def __init__(self, port, name, led = None, power = None):
         """
         Instantiate with the Pi and port to which the DHT22 output
@@ -243,12 +243,21 @@ class DHT22:
         """Cancel the DHT22 sensor."""
         
         self.pi.set_watchdog(self.port, 0)
-
+        
         if self.cb is not None:
             self.cb.cancel()
             self.cb = None
     
-    def set(self, connection, cursor, setdb=True):
+    def read(self):
+        self.trigger()
+        time.sleep(0.2)
+        
+        logger = com_logger.Logger('DHT22 ' + self.name)
+        logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
+        
+        return self.temperature(), self.humidity()
+    
+    def set(self, connection, cursor, setdb = True):
         self.trigger()
         time.sleep(0.2)
         
@@ -260,5 +269,7 @@ class DHT22:
                 dal = dal_dht22.DAL_DHT22(connection, cursor)
                 dal.set_dht22(self.name, str(self.temperature()), str(self.humidity()))
             logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
+            
+            # TODO call web service
         
         self.cancel()

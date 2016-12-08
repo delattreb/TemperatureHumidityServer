@@ -25,19 +25,37 @@ class ClientWebServices:
             self.logger.error('A problem occured while communicating with the service')
             self.logger.error(jsonwsp_resp.response_body)
     
-    def getcalculator(self, ):
+    def getversion(self):
         try:
-            calc_client = JSONWSPClient(self.url + '/Calculator/jsonwsp/description')
+            calc_client = JSONWSPClient(self.url + '/InfoService/jsonwsp/description')
+            jsonwsp_resp = calc_client.getversion()
+            self.print_result(jsonwsp_resp)
+            self.logger.debug('Call WS getcalculator')
+        except Exception as exp:
+            self.logger.error(repr(exp))
+    
+    def getcalculator(self):
+        try:
+            calc_client = JSONWSPClient(self.url + '/CalculatorService/jsonwsp/description')
             jsonwsp_resp = calc_client.add(a = 25, b = 1)
             self.print_result(jsonwsp_resp)
             self.logger.debug('Call WS getcalculator')
         except Exception as exp:
             self.logger.error(repr(exp))
     
-    def getmysql(self, ):
+    def gettemphum(self):
         try:
-            calc_client = JSONWSPClient(self.url + '/MySQL/jsonwsp/description')
-            jsonwsp_resp = calc_client.add(a = 16, b = 2)
+            calc_client = JSONWSPClient(self.url + '/DHT22Service/jsonwsp/description')
+            jsonwsp_resp = calc_client.read()
+            self.print_result(jsonwsp_resp)
+            self.logger.debug('Call WS getmysql')
+        except Exception as exp:
+            self.logger.error(repr(exp))
+    
+    def inserttemphum(self, temperature, humidity):
+        try:
+            calc_client = JSONWSPClient(self.url + '/SQLiteService/jsonwsp/description')
+            jsonwsp_resp = calc_client.inserttemphum(temp = temperature, hum = humidity)
             self.print_result(jsonwsp_resp)
             self.logger.debug('Call WS getmysql')
         except Exception as exp:

@@ -15,18 +15,18 @@ class ServerWebServices:
         self.config = conf.getconfig()
         
         # Log server WebServices
-        set_logfile(join(dirname(normpath(abspath(__file__))), 'webservices.log'))
-        set_loglevel(4)
-        set_log_backup_count(50)
-        set_log_maxsize(50000)
+        set_logfile(join(dirname(normpath(abspath(__file__))), self.config['WEBSERVICES']['logfile']))
+        set_loglevel(int(self.config['WEBSERVICES']['loglevel']))
+        set_log_backup_count(int(self.config['WEBSERVICES']['logbackupcount']))
+        set_log_maxsize(int(self.config['WEBSERVICES']['logfilesize']))
     
     def run(self):
         port = int(self.config['WEBSERVICES']['port'])
         self.logger.info('Services are running on port %(port)s.' % {'port': port})
         # Set list of WebServices
         scriptdir = dirname(abspath(__file__))
-        service_modules = ['calculator', 'mysql']
-        application = LadonWSGIApplication(service_modules, [join(scriptdir, 'services')], catalog_name = 'MySQL WebServices',
-                                           catalog_desc = 'MySQL WebServices', logging = 31)
+        service_modules = ['calculatorservice', 'mysqlservice', 'sqliteservice']
+        application = LadonWSGIApplication(service_modules, [join(scriptdir, 'services')], catalog_name = self.config['WEBSERVICES']['name'],
+                                           catalog_desc = self.config['WEBSERVICES']['description'], logging = 31)
         server = wsgiref.simple_server.make_server('', port, application)
         server.serve_forever()
