@@ -6,6 +6,7 @@ Date : 07/08/2016
 
 import sqlite3
 
+from ladon.compat import PORTABLE_STRING
 from ladon.ladonizer import ladonize
 
 from dal import dal_dht22
@@ -23,19 +24,20 @@ class SQLiteService(object):
         self.database = self.config['SQLITE']['database']
     
     def __del__(self):
-        self.connection.close()
-        self.cursor.close()
+        pass
+        # self.connection.close()
+        # self.cursor.close()
     
-    @ladonize(float, float, rtype = int)
+    @ladonize(PORTABLE_STRING, PORTABLE_STRING, rtype = int)
     def inserttemphum(self, temp, hum):
         try:
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
             
             dal = dal_dht22.DAL_DHT22(connection, cursor)
-            dal.set_dht22('DHT22', str(temp), str(hum))
+            dal.set_dht22(self.config['GPIO']['DHT22_INTERIOR_NAME'], temp, hum)
             
-            self.logger.debug('Insert: ' + str(temp) + ' ' + str(hum))
+            self.logger.debug('Database: ' + temp + ' ' + hum)
             return 0
         except Exception as exp:
             self.logger.error(repr(exp))

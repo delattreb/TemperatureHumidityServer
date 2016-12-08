@@ -56,6 +56,7 @@ class Config:
         # GPIO
         self.config['GPIO'] = {}
         # DHT22
+        self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sensor DHT 22 a nommer'
         self.config['GPIO']['DHT22_INTERIOR_PORT'] = '5'
         self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
