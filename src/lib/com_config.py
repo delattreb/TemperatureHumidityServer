@@ -78,7 +78,7 @@ class Config:
         
         # EXPORT
         self.config['EXPORT'] = {}
-        self.config['EXPORT']['file'] = 'data.csv'
+        self.config['EXPORT']['file'] = 'export/data.csv'
         self.config['EXPORT']['lastexport'] = '2016-12-1'
         
         # endregion
