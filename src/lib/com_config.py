@@ -75,6 +75,12 @@ class Config:
         
         # INPUT
         self.config['GPIO']['INPUT_ACQUISITION'] = '27'
+        
+        # EXPORT
+        self.config['EXPORT'] = {}
+        self.config['EXPORT']['file'] = 'data.csv'
+        self.config['EXPORT']['lastexport'] = '2016-12-1'
+        
         # endregion
         
         base_dir = os.path.dirname(os.path.abspath(__file__))

@@ -17,13 +17,10 @@ class SQLiteService(object):
     def __init__(self):
         conf = com_config.Config()
         self.config = conf.getconfig()
-        self.connection = sqlite3.Connection(self.config['SQLITE']['database'])
         self.logger = com_logger.Logger('SQLite')
-        
-        self.cursor = self.connection.cursor()
         self.database = self.config['SQLITE']['database']
     
-    def __del__(self):
+    def __delete__(self, instance):
         pass
         # self.connection.close()
         # self.cursor.close()
@@ -31,10 +28,10 @@ class SQLiteService(object):
     @ladonize(PORTABLE_STRING, PORTABLE_STRING, rtype = int)
     def inserttemphum(self, temp, hum):
         try:
-            connection = sqlite3.Connection(self.database)
-            cursor = connection.cursor()
+            connexion = sqlite3.Connection(self.database)
+            cursor = connexion.cursor()
             
-            dal = dal_dht22.DAL_DHT22(connection, cursor)
+            dal = dal_dht22.DAL_DHT22(connexion, cursor)
             dal.set_dht22(self.config['GPIO']['DHT22_INTERIOR_NAME'], temp, hum)
             
             self.logger.debug('Database: ' + temp + ' ' + hum)
