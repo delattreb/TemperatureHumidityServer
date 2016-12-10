@@ -29,17 +29,19 @@ class LCD:
         time.sleep(duration)
     
     def displaysensor(self, temp, hum):
-        self.lcd.clear()
+        # self.lcd.rectangleclear(46, 4, 62, 25)
+        # self.lcd.rectangleclear(46, 40, 68, 23)
+        
         # DHT22
         self.lcd.text(1, 5, 'Temp', 0)
-        self.lcd.text(40, 1, str(temp), 2)
-        self.lcd.text(97, 1, '°', 1)
+        self.lcd.text(45, 1, str(temp), 2)
+        self.lcd.text(102, 1, '°', 1)
         
         self.lcd.text(1, 43, 'Hum', 0)
-        self.lcd.text(40, 38, str(hum), 2)
-        self.lcd.text(99, 51, '%', 1)
+        self.lcd.text(45, 38, str(hum), 2)
+        self.lcd.text(104, 51, '%', 1)
         
-        self.lcd.line(33, 1, 33, 64, 1)
-        self.lcd.line(33, 36, 127, 36, 1)
+        self.lcd.line(33, 1, 33, 67, 1)
+        self.lcd.line(33, 35, 127, 35, 1)
         
         self.lcd.display()

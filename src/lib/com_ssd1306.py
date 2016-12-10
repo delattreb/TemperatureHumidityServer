@@ -72,13 +72,16 @@ class SSD1306:
     def rectangle(self, x, y, width, height):
         if SMBus is not None:
             self.oled.canvas.rectangle((x, y, x + width, y + height), outline = 1, fill = 0)
-    
+
+    def rectangleclear(self, x, y, width, height):
+        if SMBus is not None:
+            self.oled.canvas.rectangle((x, y, x + width, y + height), outline = 0, fill = 0)
+
     def line(self, x1, y1, x2, y2, width):
         if SMBus is not None:
             self.oled.canvas.line((x1, y1, x2, y2), fill = 1, width = width)
     
     def gauge(self, x, y, width, height, value, max_value):
-        
         if SMBus is not None:
             # exterior gauge
             self.oled.canvas.rectangle((x, y, x + width, y + height), outline = 1, fill = 0)
