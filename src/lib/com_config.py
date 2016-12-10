@@ -58,9 +58,13 @@ class Config:
         self.config['GPIO'] = {}
         # DHT22
         self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sejour'
-        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '26'
-        self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'  # 300 = 5 minutes
+        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '23'
+        self.config['GPIO']['DHT22_INTERIOR_POWERPORT'] = '22'
+        self.config['GPIO']['DHT22_INTERIOR_delay'] = '300'  # 300 = 5 minutes
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
+        
+        # LED
+        self.config['GPIO']['LED_ACQUISITION'] = '16'
         
         # DS18B20
         self.config['GPIO']['DS18B20_1'] = '/sys/bus/w1/devices/w1_bus_master1/28-0416618c01ff/w1_slave'
@@ -70,9 +74,6 @@ class Config:
         self.config['GPIO']['DS18B20_2'] = ''
         self.config['GPIO']['DS18B20_2_delay'] = '10'
         self.config['GPIO']['DS18B20_2_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DS18B20_2_delay']))))
-        
-        # LED
-        self.config['GPIO']['LED_ACQUISITION'] = '16'
         
         # INPUT
         self.config['GPIO']['INPUT_ACQUISITION'] = '27'

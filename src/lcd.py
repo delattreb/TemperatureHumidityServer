@@ -4,10 +4,9 @@ Auteur: Bruno DELATTRE
 Date : 13/11/2016
 """
 
-import sqlite3
 import time
 
-from lib import com_config, com_dht22, com_logger, com_ssd1306
+from lib import com_config, com_ssd1306
 
 
 class LCD:
@@ -22,38 +21,27 @@ class LCD:
     def splash(self, duration):
         self.lcd.clear()
         self.lcd.rectangle(0, 0, self.lcd.width_max - 1, self.lcd.height_max - 1)
-        self.lcd.text(4, 1, self.config['APPLICATION']['name'], 1)
-        self.lcd.text(4, 17, self.config['APPLICATION']['version'], 1)
-        self.lcd.text(4, 49, self.config['APPLICATION']['author'], 0)
+        self.lcd.text(2, 3, self.config['APPLICATION']['name'], 1)
+        self.lcd.text(7, 21, 'v' + self.config['APPLICATION']['version'], 1)
+        self.lcd.text(4, 48, self.config['APPLICATION']['author'], 0)
         
         self.lcd.display()
         time.sleep(duration)
     
-    def displaysensor(self):
-        connection = sqlite3.Connection(self.config['SQLITE']['database'])
-        cursor = connection.cursor()
+    def displaysensor(self, temp, hum):
+        self.lcd.rectangleclear(46, 4, 62, 25)
+        self.lcd.rectangleclear(46, 40, 68, 23)
         
-        self.lcd.clear()
         # DHT22
-        dht22 = com_dht22.DHT22(int(self.config['GPIO']['DHT22_INTERIOR_PORT']), 'DHT22')
-        dht22.set(connection, cursor, False)
-        self.lcd.text(1, 1, 'Temp: ' + str(dht22.temperature()) + '°C', 2)
-        self.lcd.text(1, 1, 'Hum: ' + str(dht22.humidity()) + '%', 2)
+        self.lcd.text(1, 5, 'Temp', 0)
+        self.lcd.text(45, 1, str(temp)[:4], 2)
+        self.lcd.text(102, 1, '°', 1)
         
-        # DS18B20
-        # ds18b20 = com_ds18b20.DS18B20()
-        # self.lcd.text(1, 11, 'DS18B20 Int: ' + str(ds18b20.read('DS18B20 Interior', self.config['GPIO']['DS18B20_1'], connection, cursor, False)) + '°C', 0)
+        self.lcd.text(1, 43, 'Hum', 0)
+        self.lcd.text(45, 38, str(hum)[:4], 2)
+        self.lcd.text(104, 51, '%', 1)
+        
+        self.lcd.line(33, 1, 33, 67, 1)
+        self.lcd.line(33, 35, 127, 35, 1)
         
         self.lcd.display()
-        time.sleep(int(self.config['APPLICATION']['refreshsensor']))
-    
-    def displaystartacquisition(self):
-        logger = com_logger.Logger()
-        cpt = int(self.config['ACQUISITION']['trigger'])
-        for i in range(cpt):
-            self.lcd.clear()
-            self.lcd.text(36, 5, '- START -', 1)
-            self.lcd.text(55, 35, str(int(self.config['ACQUISITION']['trigger']) - i), 2)
-            self.lcd.display()
-            time.sleep(1)
-            logger.debug('Start in: ' + str(int(self.config['ACQUISITION']['trigger']) - i))

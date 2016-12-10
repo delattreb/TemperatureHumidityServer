@@ -1,16 +1,10 @@
-"""
-com_dht22.py v1.0.0
-Auteur: Bruno DELATTRE
-Date : 11/11/2016
-"""
-
 import atexit
 import time
 
 import pigpio
 
 from dal import dal_dht22
-from lib import com_gpio_inout, com_logger
+from lib import com_logger
 from webservices import clientwebservices
 
 
@@ -26,7 +20,7 @@ class DHT22:
  
     For 3V3 operation connect pin 1 to 3V3 and pin 4 to ground.
  
-    Connect pin 2 to a port.
+    Connect pin 2 to a gpio.
  
     For 5V operation connect pin 1 to 5V and pin 4 to ground.
  
@@ -36,31 +30,32 @@ class DHT22:
                      |
     DHT22 pin 2 -----+
                      |
-    port ------------+
+    gpio ------------+
     """
     
-    def __init__(self, port, name, led = None, power = None):
+    def __init__(self, gpio, led = None, power = None):
         """
-        Instantiate with the Pi and port to which the DHT22 output pin is connected.
+        Instantiate with the Pi and gpio to which the DHT22 output
+        pin is connected.
   
-        Optionally a led may be specified.  This will be blinked for each successful reading.
+        Optionally a led may be specified.  This will be blinked for
+        each successful reading.
   
-        Optionally a port used to power the sensor may be specified.
-        This port will be set high to power the sensor.  If the sensor
+        Optionally a gpio used to power the sensor may be specified.
+        This gpio will be set high to power the sensor.  If the sensor
         locks it will be power cycled to restart the readings.
   
         Taking readings more often than about once every two seconds will
         eventually cause the DHT22 to hang.  A 3 second interval seems OK.
         """
-        
-        self.pi = pi = pigpio.pi()
-        self.port = port
+        pi = pigpio.pi()
+        self.pi = pi
+        self.gpio = gpio
         self.LED = led
         self.power = power
-        self.name = name
         
         if power is not None:
-            pi.write(power, 1)  # Switch sensor on.
+            self.pi.write(power, 1)  # Switch sensor on.
             time.sleep(2)
         
         self.powered = True
@@ -86,11 +81,11 @@ class DHT22:
         self.high_tick = 0
         self.bit = 40
         
-        pi.set_pull_up_down(port, pigpio.PUD_OFF)
+        self.pi.set_pull_up_down(gpio, pigpio.PUD_OFF)
         
-        pi.set_watchdog(port, 0)  # Kill any watchdogs.
+        self.pi.set_watchdog(gpio, 0)  # Kill any watchdogs.
         
-        self.cb = pi.callback(port, pigpio.EITHER_EDGE, self._cb)
+        self.cb = self.pi.callback(gpio, pigpio.EITHER_EDGE, self._cb)
     
     def _cb(self, gpio, level, tick):
         """
@@ -120,7 +115,7 @@ class DHT22:
                     
                     # 40th bit received.
                     
-                    self.pi.set_watchdog(self.port, 0)
+                    self.pi.set_watchdog(self.gpio, 0)
                     
                     self.no_response = 0
                     
@@ -132,7 +127,7 @@ class DHT22:
                         
                         if self.tH & 128:  # Negative temperature.
                             mult = -0.1
-                            self.tH &= 127
+                            self.tH = self.tH & 127
                         else:
                             mult = 0.1
                         
@@ -175,7 +170,7 @@ class DHT22:
                 self.CS = 0
         
         else:  # level == pigpio.TIMEOUT:
-            self.pi.set_watchdog(self.port, 0)
+            self.pi.set_watchdog(self.gpio, 0)
             if self.bit < 8:  # Too few data bits received.
                 self.bad_MM += 1  # Bump missing message count.
                 self.no_response += 1
@@ -198,11 +193,11 @@ class DHT22:
     
     def temperature(self):
         """Return current temperature."""
-        return round(self.temp, 2)
+        return self.temp
     
     def humidity(self):
         """Return current relative humidity."""
-        return round(self.rhum, 2)
+        return self.rhum
     
     def staleness(self):
         """Return time since measurement made."""
@@ -233,48 +228,35 @@ class DHT22:
             if self.LED is not None:
                 self.pi.write(self.LED, 1)
             
-            self.pi.write(self.port, pigpio.LOW)
+            self.pi.write(self.gpio, pigpio.LOW)
             time.sleep(0.017)  # 17 ms
-            self.pi.set_mode(self.port, pigpio.INPUT)
-            self.pi.set_watchdog(self.port, 200)
+            self.pi.set_mode(self.gpio, pigpio.INPUT)
+            self.pi.set_watchdog(self.gpio, 200)
     
     def cancel(self):
         """Cancel the DHT22 sensor."""
         
-        self.pi.set_watchdog(self.port, 0)
+        self.pi.set_watchdog(self.gpio, 0)
         
         if self.cb is not None:
             self.cb.cancel()
             self.cb = None
     
-    def read(self):
+    def set(self, name, connection, cursor, lcd):
         self.trigger()
         time.sleep(0.2)
         
-        logger = com_logger.Logger('DHT22 ' + self.name)
-        logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
+        # Inssert into database
+        dal = dal_dht22.DAL_DHT22(connection, cursor)
+        dal.set_dht22(name, self.temperature(), self.humidity())
         
-        return self.temperature(), self.humidity()
-    
-    def set(self, connection, cursor, setdb = True):
-        self.trigger()
-        time.sleep(0.2)
-        
-        logger = com_logger.Logger('DHT22 ' + self.name)
-        if self.temp == -999:
-            logger.error('DTH22 not find')
-        else:
-            if setdb:
-                dal = dal_dht22.DAL_DHT22(connection, cursor)
-                dal.set_dht22(self.name, str(self.temperature()), str(self.humidity()))
-            logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
-        
-        # Call web service
+        # Call WebServices
         client = clientwebservices.ClientWebServices()
-        client.inserttemphum(self.name, self.temperature(), self.humidity())
+        client.inserttemphum(name, self.temperature(), self.humidity())
         
-        # Blink at each picture taken
-        gpioinout = com_gpio_inout.GPIOINOT()
-        gpioinout.blink(0.04, 1)
+        # Display info on LCd
+        lcd.displaysensor(self.temperature(), self.humidity())
         
-        self.cancel()
+        # Log
+        logger = com_logger.Logger('DHT22')
+        logger.debug('Read Temp: ' + str(self.temperature())[:4] + ' Hum: ' + str(self.humidity())[:4])
