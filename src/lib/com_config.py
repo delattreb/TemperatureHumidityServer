@@ -52,7 +52,8 @@ class Config:
         # SQLite
         self.config['SQLITE'] = {}
         self.config['SQLITE']['database'] = 'database.db'
-        
+        self.config['SQLITE']['databasecopy'] = 'databasecopy.db'
+
         # GPIO
         self.config['GPIO'] = {}
         # DHT22

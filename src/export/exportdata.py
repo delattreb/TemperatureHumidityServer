@@ -15,7 +15,7 @@ class ExportData:
         
         self.logger = com_logger.Logger('Export Data')
         
-        sqlite = com_sqlite.SQLite()
+        sqlite = com_sqlite.SQLite(True)
         self.connexion = sqlite.connection
         self.cursor = sqlite.cursor
     

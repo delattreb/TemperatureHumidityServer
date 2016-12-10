@@ -10,7 +10,8 @@ import time
 import pigpio
 
 from dal import dal_dht22
-from lib import com_logger, com_gpio_inout
+from lib import com_gpio_inout, com_logger
+from webservices import clientwebservices
 
 
 class DHT22:
@@ -267,8 +268,10 @@ class DHT22:
                 dal = dal_dht22.DAL_DHT22(connection, cursor)
                 dal.set_dht22(self.name, str(self.temperature()), str(self.humidity()))
             logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
-            
-        # TODO call web service
+        
+        # Call web service
+        client = clientwebservices.ClientWebServices()
+        client.inserttemphum(self.name, self.temperature(), self.humidity())
         
         # Blink at each picture taken
         gpioinout = com_gpio_inout.GPIOINOT()

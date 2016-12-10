@@ -25,16 +25,16 @@ class SQLiteService(object):
         # self.connection.close()
         # self.cursor.close()
     
-    @ladonize(PORTABLE_STRING, PORTABLE_STRING, rtype = int)
-    def inserttemphum(self, temp, hum):
+    @ladonize(PORTABLE_STRING, PORTABLE_STRING, PORTABLE_STRING, rtype = int)
+    def inserttemphum(self, name, temp, hum):
         try:
             connexion = sqlite3.Connection(self.database)
             cursor = connexion.cursor()
             
             dal = dal_dht22.DAL_DHT22(connexion, cursor)
-            dal.set_dht22(self.config['GPIO']['DHT22_INTERIOR_NAME'], temp, hum)
+            dal.set_dht22(name, temp, hum)
             
-            self.logger.debug('Database: ' + temp + ' ' + hum)
+            self.logger.debug('Database: ' + name + ' ' + temp + ' ' + hum)
             return 0
         except Exception as exp:
             self.logger.error(repr(exp))

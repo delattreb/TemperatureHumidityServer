@@ -12,4 +12,4 @@ conf.setconfig()
 
 client = clientwebservices.ClientWebServices()
 client.getversion()
-client.inserttemphum(25.3, 45.7)
+client.inserttemphum('test name', 25.3, 45.7)

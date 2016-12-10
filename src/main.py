@@ -24,6 +24,7 @@ lcd = lcd.LCD()
 
 # LCD Splash
 lcd.splash(int(config['APPLICATION']['splashduration']))
+lcd.displayoff()
 
 # Create new threads
 threadlock = threading.Lock()
@@ -32,12 +33,11 @@ threadlock = threading.Lock()
 #                                                                                                                                           'DS18B20_1_delay']),
 #                                                                         int(config['GPIO']['DS18B20_1_nb']))
 
-# TODO modif thred to acquire ti infiny
 # TODO : Start pigpiod
 dht22_thread_int = thread_acquisition_dht22.ThreadAcquisitionDHT22(config['GPIO']['DHT22_INTERIOR_NAME'], threadlock,
                                                                    int(config['GPIO']['DHT22_INTERIOR_PORT']), int(config['GPIO']['DHT22_INTERIOR_delay']),
-                                                                   5, True)
-# int(config['GPIO']['DHT22_INTERIOR_nb'])
+                                                                   int(config['GPIO']['DHT22_INTERIOR_nb']), True)
+
 # ds18b20_thread_int.start()
 dht22_thread_int.start()
 
