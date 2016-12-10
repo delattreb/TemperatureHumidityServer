@@ -242,7 +242,7 @@ class DHT22:
             self.cb.cancel()
             self.cb = None
     
-    def set(self, name, connection, cursor):
+    def set(self, name, connection, cursor, lcd):
         self.trigger()
         time.sleep(0.2)
         
@@ -254,6 +254,9 @@ class DHT22:
         client = clientwebservices.ClientWebServices()
         client.inserttemphum(name, self.temperature(), self.humidity())
         
+        # Display info on LCd
+        lcd.displaysensor(self.temperature(), self.humidity())
+        
         # Log
         logger = com_logger.Logger('DHT22')
-        logger.debug('Read Temp: ' + str(self.temperature()) + ' Hum: ' + str(self.humidity()))
+        logger.debug('Read Temp: ' + str(self.temperature())[:4] + ' Hum: ' + str(self.humidity())[:4])
