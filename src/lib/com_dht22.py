@@ -10,7 +10,7 @@ import time
 import pigpio
 
 from dal import dal_dht22
-from lib import com_logger
+from lib import com_logger, com_gpio_inout
 
 
 class DHT22:
@@ -40,11 +40,9 @@ class DHT22:
     
     def __init__(self, port, name, led = None, power = None):
         """
-        Instantiate with the Pi and port to which the DHT22 output
-        pin is connected.
+        Instantiate with the Pi and port to which the DHT22 output pin is connected.
   
-        Optionally a led may be specified.  This will be blinked for
-        each successful reading.
+        Optionally a led may be specified.  This will be blinked for each successful reading.
   
         Optionally a port used to power the sensor may be specified.
         This port will be set high to power the sensor.  If the sensor
@@ -270,6 +268,10 @@ class DHT22:
                 dal.set_dht22(self.name, str(self.temperature()), str(self.humidity()))
             logger.info('Temperature:' + str(self.temperature()) + ' Humidity:' + str(self.humidity()))
             
-            # TODO call web service
+        # TODO call web service
+        
+        # Blink at each picture taken
+        gpioinout = com_gpio_inout.GPIOINOT()
+        gpioinout.blink(0.04, 1)
         
         self.cancel()

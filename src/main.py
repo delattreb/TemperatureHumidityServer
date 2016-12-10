@@ -32,16 +32,18 @@ threadlock = threading.Lock()
 #                                                                                                                                           'DS18B20_1_delay']),
 #                                                                         int(config['GPIO']['DS18B20_1_nb']))
 
+# TODO modif thred to acquire ti infiny
+# TODO : Start pigpiod
 dht22_thread_int = thread_acquisition_dht22.ThreadAcquisitionDHT22(config['GPIO']['DHT22_INTERIOR_NAME'], threadlock,
                                                                    int(config['GPIO']['DHT22_INTERIOR_PORT']), int(config['GPIO']['DHT22_INTERIOR_delay']),
-                                                                   int(config['GPIO']['DHT22_INTERIOR_nb']))
-
+                                                                   5, True)
+# int(config['GPIO']['DHT22_INTERIOR_nb'])
 # ds18b20_thread_int.start()
 dht22_thread_int.start()
 
 # Wait end for each thread
 # ds18b20_thread_int.join()
-# dht22_thread_int.join()()
+dht22_thread_int.join()
 
 logger.info('Application stop')
 gpio = com_gpio_inout.GPIOINOT()

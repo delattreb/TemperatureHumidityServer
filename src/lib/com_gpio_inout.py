@@ -26,10 +26,11 @@ class GPIOINOT:
         self.gpio.setuppud(self.input_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
     
     def setacquisition(self, state):
-        self.gpio.setio(self.led_acquisition, state)
-        
-        logger = com_logger.Logger('LED_ACQUISITION')
-        logger.debug('LED ' + str(state))
+        if self.led_acquisition > 0:
+            self.gpio.setio(self.led_acquisition, state)
+            
+            logger = com_logger.Logger('LED_ACQUISITION')
+            logger.debug('LED ' + str(state))
     
     def getacquisition(self):
         state = self.gpio.getio(self.input_acquisition)

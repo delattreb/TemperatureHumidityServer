@@ -12,25 +12,25 @@ from lib import com_config, com_dht22, com_logger, com_ssd1306
 
 class LCD:
     def __init__(self):
-        self.config = com_config.getConfig()
+        conf = com_config.Config()
+        self.config = conf.getconfig()
         self.lcd = com_ssd1306.SSD1306()
     
-    def displayOff(self):
+    def displayoff(self):
         self.lcd.offscreen()
     
     def splash(self, duration):
         self.lcd.clear()
         self.lcd.rectangle(0, 0, self.lcd.width_max - 1, self.lcd.height_max - 1)
-        self.lcd.text(4, 1, self.config['APPLICATION']['name'], 2)
+        self.lcd.text(4, 1, self.config['APPLICATION']['name'], 1)
         self.lcd.text(4, 17, self.config['APPLICATION']['version'], 1)
         self.lcd.text(4, 49, self.config['APPLICATION']['author'], 0)
         
         self.lcd.display()
         time.sleep(duration)
     
-    def displaySensor(self):
-        config = com_config.getConfig()
-        connection = sqlite3.Connection(config['SQLITE']['database'])
+    def displaysensor(self):
+        connection = sqlite3.Connection(self.config['SQLITE']['database'])
         cursor = connection.cursor()
         
         self.lcd.clear()
@@ -45,9 +45,9 @@ class LCD:
         # self.lcd.text(1, 11, 'DS18B20 Int: ' + str(ds18b20.read('DS18B20 Interior', self.config['GPIO']['DS18B20_1'], connection, cursor, False)) + '°C', 0)
         
         self.lcd.display()
-        time.sleep(int(config['APPLICATION']['refreshsensor']))
+        time.sleep(int(self.config['APPLICATION']['refreshsensor']))
     
-    def displayStartAcquisition(self):
+    def displaystartacquisition(self):
         logger = com_logger.Logger()
         cpt = int(self.config['ACQUISITION']['trigger'])
         for i in range(cpt):

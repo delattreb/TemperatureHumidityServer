@@ -56,8 +56,8 @@ class Config:
         # GPIO
         self.config['GPIO'] = {}
         # DHT22
-        self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sensor DHT 22 a nommer'
-        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '5'
+        self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'DHT22 Cave'
+        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '26'
         self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
         
@@ -71,7 +71,7 @@ class Config:
         self.config['GPIO']['DS18B20_2_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DS18B20_2_delay']))))
         
         # LED
-        self.config['GPIO']['LED_ACQUISITION'] = '23'
+        self.config['GPIO']['LED_ACQUISITION'] = '16'
         
         # INPUT
         self.config['GPIO']['INPUT_ACQUISITION'] = '27'
