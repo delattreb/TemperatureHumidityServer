@@ -23,7 +23,7 @@ class Config:
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'TemperatureHumidity'
         self.config['APPLICATION']['version'] = '1.0.0'
-        self.config['APPLICATION']['author'] = u'\u00A9' + ' Bruno DELATTRE'
+        self.config['APPLICATION']['author'] = 'c' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
         
         # WEBServices
