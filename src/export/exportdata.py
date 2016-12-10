@@ -26,7 +26,8 @@ class ExportData:
         
         self.logger.info('Write file')
         # TODO read last line and send date to req
-        file = open(self.config['EXPORT']['file'], 'a+')
+        file = open(self.config['EXPORT']['file'], 'w')
+        file.write('Date,Capteur,Température,Humidité\n')
         for row in rows:
             file.write(row[0] + ',' + row[1] + ',' + str(row[2]) + ',' + str(row[3]) + '\n')
         file.close()
