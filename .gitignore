@@ -87,12 +87,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+.idea/dataSources.local.xml
+.idea/workspace.xml
+
 !/src/lib/
 /src/data.csv
 /src/export/data.csv
 .idea/TemperatureHumidityServer.iml
 .idea/misc.xml
 .idea/modules.xml
-.idea/workspace.xml
 src/export/data.csv
 src/export/~$Rapport Temperature Humidity.xlsx
