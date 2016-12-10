@@ -59,7 +59,8 @@ class Config:
         # DHT22
         self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sejour'
         self.config['GPIO']['DHT22_INTERIOR_PORT'] = '26'
-        self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'  # 300 = 5 minutes
+        self.config['GPIO']['DHT22_INTERIOR_POWERPORT'] = '22'
+        self.config['GPIO']['DHT22_INTERIOR_delay'] = '5'  # 300 = 5 minutes
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
         
         # DS18B20

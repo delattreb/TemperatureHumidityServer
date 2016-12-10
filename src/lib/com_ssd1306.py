@@ -61,29 +61,29 @@ class SSD1306:
         if SMBus is not None:
             draw = self.oled.canvas
             if fontHeight == self.SMALL_FONT:
-                draw.text((x, y), text, font=self.__smallFont, fill=1)
+                draw.text((x, y), text, font = self.__smallFont, fill = 1)
             
             if fontHeight == self.DEFAULT_FONT:
-                draw.text((x, y), text, font=self.__defaultFont, fill=1)
+                draw.text((x, y), text, font = self.__defaultFont, fill = 1)
             
             if fontHeight == self.STRONG_FONT:
-                draw.text((x, y), text, font=self.__bigFont, fill=1)
+                draw.text((x, y), text, font = self.__bigFont, fill = 1)
     
     def rectangle(self, x, y, width, height):
         if SMBus is not None:
-            self.oled.canvas.rectangle((x, y, x + width, y + height), outline=1, fill=0)
+            self.oled.canvas.rectangle((x, y, x + width, y + height), outline = 1, fill = 0)
     
-    def line(self, x, y, width):
+    def line(self, x1, y1, x2, y2, width):
         if SMBus is not None:
-            self.oled.canvas.line((x, y), 1, width)
+            self.oled.canvas.line((x1, y1, x2, y2), fill = 1, width = width)
     
     def gauge(self, x, y, width, height, value, max_value):
         
         if SMBus is not None:
             # exterior gauge
-            self.oled.canvas.rectangle((x, y, x + width, y + height), outline=1, fill=0)
+            self.oled.canvas.rectangle((x, y, x + width, y + height), outline = 1, fill = 0)
             cal = round((((width - self.GAUGE_INTERIOR) * value) / max_value), 0)
             # interior
             self.oled.canvas.rectangle(
                 (x + (self.GAUGE_INTERIOR / 2), y + (self.GAUGE_INTERIOR / 2), (x + (self.GAUGE_INTERIOR / 2) + cal), (y + height) - (self.GAUGE_INTERIOR / 2)),
-                outline=0, fill=1)
+                outline = 0, fill = 1)

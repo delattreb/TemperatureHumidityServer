@@ -9,6 +9,7 @@ import time
 
 import pigpio
 
+import lcd
 from dal import dal_dht22
 from lib import com_gpio_inout, com_logger
 from webservices import clientwebservices
@@ -276,5 +277,9 @@ class DHT22:
         # Blink at each picture taken
         gpioinout = com_gpio_inout.GPIOINOT()
         gpioinout.blink(0.04, 1)
+        
+        # Display on LCD
+        l = lcd.LCD()
+        l.displaysensor(self.temperature(), self.humidity())
         
         self.cancel()
