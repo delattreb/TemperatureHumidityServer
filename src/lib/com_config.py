@@ -53,13 +53,13 @@ class Config:
         self.config['SQLITE'] = {}
         self.config['SQLITE']['database'] = 'database.db'
         self.config['SQLITE']['databasecopy'] = 'databasecopy.db'
-
+        
         # GPIO
         self.config['GPIO'] = {}
         # DHT22
-        self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'DHT22 Cave'
+        self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sejour'
         self.config['GPIO']['DHT22_INTERIOR_PORT'] = '26'
-        self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'
+        self.config['GPIO']['DHT22_INTERIOR_delay'] = '10'  # 300 = 5 minutes
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
         
         # DS18B20
@@ -80,7 +80,7 @@ class Config:
         # EXPORT
         self.config['EXPORT'] = {}
         self.config['EXPORT']['file'] = 'export/data.csv'
-        self.config['EXPORT']['lastexport'] = '2016-12-1'
+        self.config['EXPORT']['lastexport'] = 'export/lastexport.csv'
         
         # endregion
         

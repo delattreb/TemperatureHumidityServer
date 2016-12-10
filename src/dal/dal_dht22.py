@@ -15,9 +15,18 @@ class DAL_DHT22:
     
     """ Select"""
     
-    def get_dht22(self):
+    def get_dht22(self, lastdate):
         try:
-            self.cursor.execute('SELECT date, name, temperature, humidity FROM DHT22')
+            self.cursor.execute('SELECT date, name, temperature, humidity FROM DHT22 WHERE date > "' + lastdate + '"')
+            rows = self.cursor.fetchall()
+            return rows
+        except Exception as exp:
+            self.logger.error(repr(exp))
+            self.connection.rollback()
+    
+    def get_lastdata(self):
+        try:
+            self.cursor.execute('SELECT MAX(date) FROM DHT22')
             rows = self.cursor.fetchall()
             return rows
         except Exception as exp:
