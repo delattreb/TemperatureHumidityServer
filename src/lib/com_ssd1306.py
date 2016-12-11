@@ -92,9 +92,8 @@ class SSD1306:
                 (x+(GAUGE_INTERIOR/2), y+(GAUGE_INTERIOR/2), (x+(GAUGE_INTERIOR/2)+cal), (y+height)-(GAUGE_INTERIOR/2)),
                 outline=0, fill=1)
     
-    def progessbar(self, x, y, width, height, value, max_value, thickness, border=1):
+    def progessbar(self, x, y, width, height, value, max_value, thickness, interior=2, border=1):
         if SMBus is not None:
-            GAUGE_INTERIOR=2
             
             # exterior gauge
             self.oled.canvas.rectangle((x, y, x+width, y+height), outline=1, fill=0)
@@ -102,11 +101,13 @@ class SSD1306:
             # interior
             
             # Horizontal or vertical
-            if width > height:
-                cal=round((((width-GAUGE_INTERIOR)*value)/max_value), 0) # Horizontal
+            if width>height:
+                cal=round((((width-interior)*value)/max_value), 0)  # Horizontal
+                self.oled.canvas.rectangle(
+                    (x+(interior/2), y+(interior/2), x+(interior/2)+cal, y+height-(interior/2)),
+                    outline=0, fill=1)
             else:
-                cal=round((((height-GAUGE_INTERIOR)*value)/max_value), 0) # vertical
-
-            self.oled.canvas.rectangle(
-                (x+(GAUGE_INTERIOR/2), y+(GAUGE_INTERIOR/2), (x+(GAUGE_INTERIOR/2)+cal), (y+height)-(GAUGE_INTERIOR/2)),
-                outline=0, fill=1)
+                cal=round((((height-interior)*value)/max_value), 0)  # Vertical
+                self.oled.canvas.rectangle(
+                    (x+(interior/2), (y+height-(interior/2)), x+width-(interior/2), y+(height-cal)-(interior/2)),
+                    outline=0, fill=1)
