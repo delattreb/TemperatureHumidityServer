@@ -81,7 +81,7 @@ class SSD1306:
     
     def progressbarline(self, x, y, width, height, value, max_value, interior=2):
         if SMBus is not None:
-            
+            interiormini = interior/2
             # Exterior progressbar
             self.oled.canvas.rectangle((x, y, x+width, y+height), outline=1, fill=0)
             
@@ -90,16 +90,17 @@ class SSD1306:
             if width>height:  # Horizontal
                 cal=round((((width-interior)*value)/max_value), 0)
                 self.oled.canvas.rectangle(
-                    (x+(interior/2), y+(interior/2), x+(interior/2)+cal, y+height-(interior/2)),
+                    (x+interiormini, y+interiormini, x+interiormini+cal, y+height-interiormini),
                     outline=0, fill=1)
             else:  # Vertical
                 cal=round((((height-interior)*value)/max_value), 0)
                 self.oled.canvas.rectangle(
-                    (x+(interior/2), y+height-(interior/2), x+width-(interior/2), y+(height-cal)-(interior/2)),
+                    (x+interiormini, y+height-interiormini, x+width-interiormini, y+(height-cal)-interiormini),
                     outline=0, fill=1)
     
     def progessbar(self, x, y, width, height, value, max_value, thickness, space, interior=2, border=True):
         if SMBus is not None:
+            interiormini = interior/2
             # block count
             # block=round((height-interior)/(thickness+space), 0)
             
@@ -112,18 +113,18 @@ class SSD1306:
             if width>height:  # Horizontal
                 totalblock=round((width-interior)/(thickness+space), 0)
                 cal=int(round(((totalblock*value)/max_value), 0))
-                index=x+(interior/2)
+                index=x+interiormini
                 for i in range(0, cal):
                     self.oled.canvas.rectangle(
-                        (index, y+(interior/2), index+thickness, y+height-(interior/2)),
+                        (index, y+interiormini, index+thickness, y+height-interiormini),
                         outline=0, fill=1)
                     index+=(thickness+space)
             else:  # Vertical
                 totalblock=round((height-interior)/(thickness+space), 0)
                 cal=int(round(((totalblock*value)/max_value), 0))
-                index=y+height-(interior/2)
+                index=y+height-interiormini
                 for i in range(0, cal):
                     self.oled.canvas.rectangle(
-                        (x+(interior/2), index, x+width-(interior/2), index-thickness),
+                        (x+interiormini, index, x+width-interiormini, index-thickness),
                         outline=0, fill=1)
                     index-=(thickness+space)

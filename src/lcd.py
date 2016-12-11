@@ -30,8 +30,8 @@ class LCD:
     
     def displaysensor(self, temp, hum):
         # Erase
-        self.lcd.rectangleclear(46, 4, 62, 25)  # TODO a revoir
-        self.lcd.rectangleclear(46, 40, 68, 23)  # TODO a revoir
+        self.lcd.rectangleclear(60, 4, 62, 24)  # TODO a revoir
+        self.lcd.rectangleclear(60, 41, 65, 22)  # TODO a revoir
         
         # DHT22
         self.lcd.text(25, 2, 'Temp', 0)
