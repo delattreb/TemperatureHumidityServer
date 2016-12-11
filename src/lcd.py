@@ -30,8 +30,8 @@ class LCD:
     
     def displaysensor(self, temp, hum):
         # Erase
-        self.lcd.rectangleclear(46, 4, 62, 25) # TODO a revoir
-        self.lcd.rectangleclear(46, 40, 68, 23) # TODO a revoir
+        self.lcd.rectangleclear(46, 4, 62, 25)  # TODO a revoir
+        self.lcd.rectangleclear(46, 40, 68, 23)  # TODO a revoir
         
         # DHT22
         self.lcd.text(25, 2, 'Temp', 0)
@@ -47,8 +47,8 @@ class LCD:
         self.lcd.line(55, 35, 127, 35, 1)
         
         # Draw progressbar
-        self.lcd.progessbar(0, 0, 10, 63, 100, 100, 4)
-
-        #self.lcd.progessbar(0, 10, 127, 10, 50, 100, 4)
-
+        self.lcd.progessbar(0, 0, 10, 63, 100, 100, 7, 2)
+        
+        # self.lcd.progessbar(0, 10, 127, 10, 50, 100, 4)
+        
         self.lcd.display()
