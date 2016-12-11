@@ -48,5 +48,7 @@ class LCD:
         
         # Draw progressbar
         self.lcd.progessbar(11, 0, 10, 63, 50, 100, 4)
-        
+
+        self.lcd.progessbar(0, 10, 127, 10, 50, 100, 4)
+
         self.lcd.display()
