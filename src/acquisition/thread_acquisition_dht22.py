@@ -54,9 +54,10 @@ class ThreadAcquisitionDHT22(threading.Thread):
                 instance.set(self.name, connection, cursor)
                 instance.progressbarreadoff(l)
                 cpt=0
-            instance.refreshlcd(l, cpt, self.delayread, cptws, self.delayws)
             cpt+=1
             cptws+=1
+
+            instance.refreshlcd(l, cpt, self.delayread, cptws, self.delayws)
             self.lock.release()
             
             self.counter-=1
