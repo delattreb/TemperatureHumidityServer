@@ -242,12 +242,23 @@ class DHT22:
             self.cb.cancel()
             self.cb=None
     
-    def refreshlcd(self, lcd, cpt, delay):
+    def refreshlcd(self, lcd, cptread, delayread, cptws, delayws):
         # Display info on LCD
-        lcd.displaysensor(self.temperature(), self.humidity(), cpt, delay)
+        lcd.displaysensor(self.temperature(), self.humidity(), cptread, delayread, cptws, delayws)
     
-    def progressbaroff(self, lcd):
-        lcd.progressbaroff()
+    def progressbarreadoff(self, lcd):
+        lcd.progressbarreadoff()
+    
+    def progressbarwsoff(self, lcd):
+        lcd.progressbarwsoff()
+    
+    def setws(self, name):
+        self.trigger()
+        time.sleep(0.2)
+        
+        # Call WebServices
+        client=clientwebservices.ClientWebServices()
+        client.inserttemphum(name, self.temperature(), self.humidity())
     
     def set(self, name, connection, cursor):
         self.trigger()
@@ -256,10 +267,6 @@ class DHT22:
         # Inssert into database
         dal=dal_dht22.DAL_DHT22(connection, cursor)
         dal.set_dht22(name, self.temperature(), self.humidity())
-        
-        # Call WebServices
-        client=clientwebservices.ClientWebServices()
-        client.inserttemphum(name, self.temperature(), self.humidity())
         
         # Log
         logger=com_logger.Logger('DHT22')

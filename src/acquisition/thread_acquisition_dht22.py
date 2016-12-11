@@ -13,7 +13,7 @@ from lib import com_config, com_dht22, com_logger
 
 
 class ThreadAcquisitionDHT22(threading.Thread):
-    def __init__(self, name, lock, port, delay, delayread, counter, ledport, infiny=False):
+    def __init__(self, name, lock, port, delay, delayread, delayws, counter, ledport, infiny=False):
         super().__init__()
         conf=com_config.Config()
         config=conf.getconfig()
@@ -23,6 +23,7 @@ class ThreadAcquisitionDHT22(threading.Thread):
         self.counter=counter
         self.delay=delay
         self.delayread=delayread
+        self.delayws=delayws
         self.lock=lock
         self.infiny=infiny
         self.database=config['SQLITE']['database']
@@ -37,17 +38,25 @@ class ThreadAcquisitionDHT22(threading.Thread):
         instance=com_dht22.DHT22(self.port, self.ledport)
         l=lcd.LCD()
         cpt=0
+        cptws=0
         while self.counter or self.infiny:
             self.lock.acquire()
             
             connection=sqlite3.Connection(self.database)
             cursor=connection.cursor()
+            
+            if cptws >self.delayws:
+                instance.setws(self.name)
+                instance.progressbarwsoff(l)
+                cptws=0
+            
             if cpt>self.delayread:
                 instance.set(self.name, connection, cursor)
-                instance.progressbaroff(l)
+                instance.progressbarreadoff(l)
                 cpt=0
-            instance.refreshlcd(l, cpt, self.delayread)
+            instance.refreshlcd(l, cpt, self.delayread, cptws, self.delayws)
             cpt+=1
+            cptws+=1
             self.lock.release()
             
             self.counter-=1
