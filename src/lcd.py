@@ -45,10 +45,14 @@ class LCD:
         # Draw Line
         self.lcd.line(55, 0, 55, 63, 1)
         self.lcd.line(55, 35, 127, 35, 1)
+        #self.lcd.line(23, 0, 23, 63, 1)
         
         # Draw progressbar
-        self.lcd.progessbar(0, 0, 10, 63, 100, 100, 7, 2)
+        self.lcd.line(1, 4, 7, 4, 1)
+        self.lcd.line(13, 4, 19, 4, 1)
+        self.lcd.progessbar(0, 3, 8, 61, 100, 100, 8, 2, 0, False)
+        self.lcd.progessbar(12, 3, 8, 61, 100, 100, 8, 2, 0, False)
         
-        self.lcd.progessbar(0, 10, 127, 10, 100, 100, 7, 2)
+        # self.lcd.progessbar(0, 10, 121, 10, 100, 100, 8, 2, 0, False)
         
         self.lcd.display()

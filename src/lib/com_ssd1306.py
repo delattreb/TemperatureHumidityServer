@@ -98,13 +98,14 @@ class SSD1306:
                     (x+(interior/2), y+height-(interior/2), x+width-(interior/2), y+(height-cal)-(interior/2)),
                     outline=0, fill=1)
     
-    def progessbar(self, x, y, width, height, value, max_value, thickness, space, interior=2, border=1):
+    def progessbar(self, x, y, width, height, value, max_value, thickness, space, interior=2, border=True):
         if SMBus is not None:
             # block count
             # block=round((height-interior)/(thickness+space), 0)
             
             # Exterior progressbar
-            self.oled.canvas.rectangle((x, y, x+width, y+height), outline=1, fill=0)
+            if border:
+                self.oled.canvas.rectangle((x, y, x+width, y+height), outline=1, fill=0)
             
             # Interior
             # Horizontal or vertical
