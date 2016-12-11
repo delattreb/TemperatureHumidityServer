@@ -109,10 +109,14 @@ class SSD1306:
             # Interior
             # Horizontal or vertical
             if width>height:  # Horizontal
-                cal=round((((width-interior)*value)/max_value), 0)
-                self.oled.canvas.rectangle(
-                    (x+(interior/2), y+(interior/2), x+(interior/2)+cal, y+height-(interior/2)),
-                    outline=0, fill=1)
+                totalblock=round((width-interior)/(thickness+space), 0)
+                cal=int(round(((totalblock*value)/max_value), 0))
+                index=x+(interior/2)
+                for i in range(0, cal):
+                    self.oled.canvas.rectangle(
+                        (index, y+(interior/2), index+thickness, y+height-(interior/2)),
+                        outline=0, fill=1)
+                    index+=(thickness+space)
             else:  # Vertical
                 totalblock=round((height-interior)/(thickness+space), 0)
                 cal=int(round(((totalblock*value)/max_value), 0))
