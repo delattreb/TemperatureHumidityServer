@@ -28,7 +28,10 @@ class LCD:
         self.lcd.display()
         time.sleep(duration)
     
-    def displaysensor(self, temp, hum):
+    def progressbaroff(self):
+        self.lcd.rectangleclear(0, 3, 8, 61)
+
+    def displaysensor(self, temp, hum, cpt, delay):
         # Erase
         self.lcd.rectangleclear(60, 4, 62, 24)  # TODO a revoir
         self.lcd.rectangleclear(60, 41, 65, 22)  # TODO a revoir
@@ -45,12 +48,12 @@ class LCD:
         # Draw Line
         self.lcd.line(55, 0, 55, 63, 1)
         self.lcd.line(55, 35, 127, 35, 1)
-        #self.lcd.line(23, 0, 23, 63, 1)
+        # self.lcd.line(23, 0, 23, 63, 1)
         
         # Draw progressbar
         self.lcd.line(1, 4, 7, 4, 1)
         self.lcd.line(13, 4, 19, 4, 1)
-        self.lcd.progessbar(0, 3, 8, 61, 100, 100, 8, 2, 0, False)
+        self.lcd.progessbar(0, 3, 8, 61, cpt, delay, 8, 2, 0, False)
         self.lcd.progessbar(12, 3, 8, 61, 100, 100, 8, 2, 0, False)
         
         # self.lcd.progessbar(0, 10, 121, 10, 100, 100, 8, 2, 0, False)

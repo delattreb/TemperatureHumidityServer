@@ -36,6 +36,7 @@ threadlock=threading.Lock()
 # TODO : Start pigpiod
 dht22_thread_int=thread_acquisition_dht22.ThreadAcquisitionDHT22(config['GPIO']['DHT22_INTERIOR_NAME'], threadlock,
                                                                  int(config['GPIO']['DHT22_INTERIOR_PORT']), int(config['GPIO']['DHT22_INTERIOR_delay']),
+                                                                 int(config['GPIO']['DHT22_INTERIOR_delayread']),
                                                                  int(config['GPIO']['DHT22_INTERIOR_nb']), int(config['GPIO']['LED_ACQUISITION']), True)
 
 # ds18b20_thread_int.start()
