@@ -255,12 +255,14 @@ class DHT22:
         lcd.progressbarwsoff()
     
     def setws(self, name):
+        self.powered = False
         self.trigger()
         time.sleep(0.2)
+        self.powered = True
         
         # Call WebServices
         client = clientwebservices.ClientWebServices()
-        client.inserttemphum(name, self.temperature()[:4], self.humidity()[:4])
+        client.inserttemphum(name, self.temperature(), self.humidity())
     
     def set(self, name, connection, cursor):
         self.trigger()

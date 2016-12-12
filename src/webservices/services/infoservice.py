@@ -31,16 +31,3 @@ class InfoService(object):
         v.version = self.config['WEBSERVICES']['version']
         version += [v]
         return version
-
-"""
-    @ladonize(PORTABLE_STRING, rtype = [Version])
-    def getversion(self, search_frase = PORTABLE_STRING('')):
-        version = []
-        v = Version()
-        v.name = self.config['WEBSERVICES']['name']
-        v.description = self.config['WEBSERVICES']['description']
-        v.version = self.config['WEBSERVICES']['version']
-        version += [v]
-        return version
-
-"""
