@@ -4,5 +4,9 @@ Temperature and Humidity Server (Sensored by DHT22)
 
 Acquisition on Raspberry Pi.
 Read temperature and humidity on DHT2 sensor.
-Insert to by Web services
+Insert by Web services.
+
+Display temperature and humidity on LCd screen 128x64.
+
+
 
