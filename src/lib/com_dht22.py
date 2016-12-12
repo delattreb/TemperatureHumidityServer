@@ -246,10 +246,12 @@ class DHT22:
         # Display info on LCD
         lcd.displaysensor(self.temperature(), self.humidity(), cptread, delayread, cptws, delayws)
     
-    def progressbarreadoff(self, lcd):
+    @staticmethod
+    def progressbarreadoff(lcd):
         lcd.progressbarreadoff()
     
-    def progressbarwsoff(self, lcd):
+    @staticmethod
+    def progressbarwsoff(lcd):
         lcd.progressbarwsoff()
     
     def setws(self, name):
