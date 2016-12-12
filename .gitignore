@@ -100,3 +100,4 @@ ENV/
 .idea/modules.xml
 src/export/data.csv
 src/export/~$Rapport Temperature Humidity.xlsx
+/src/databasecopy.db

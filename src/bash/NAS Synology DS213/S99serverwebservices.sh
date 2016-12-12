@@ -1,19 +1,24 @@
 #!/bin/sh
-#
-# S99serverwebservice - Lancement
-# Copier dans /usr/syno/etc.defaults/rc.sysv/
-#
-PATH=/bin:/usr/bin
+# Synology DSM bootup script
+# Configured Variables:
+PYTHON_EXEC="/volume1/@appstore/py3k/usr/local/bin/python3.5"
+SCRIPT_EXEC="/volume1/web/temperaturehumidityserver/runserverwebservices.py"
 
-case $1 in
+# Begin script
+case "$1" in
 start)
-cd /volume1/web/TemperatureHumidityServer
-python3.5 runserverwebservices.sh
-exit 0
-;;
+  PATH=$PATH:/volume1/web/temperaturehumidityserver/
+  printf "%-30s" "Starting script"
+  ${PYTHON_EXEC} ${SCRIPT_EXEC} &
+  printf "[%4s]\n" "done"
+ ;;
 stop)
-exit 0
-;;
+  printf "%-30s" "Stopping script"
+  printf "[%4s]\n" "done"
+  ;;
 *)
+  echo "Usage: $0 {start|stop}"
+  exit 1
 esac
 
+exit 0
