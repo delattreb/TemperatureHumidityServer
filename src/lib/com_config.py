@@ -26,6 +26,12 @@ class Config:
         self.config['APPLICATION']['author'] = 'c' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
         
+        # EMAIL
+        self.config['EMAIL'] = {}
+        self.config['EMAIL']['from'] = 'pythonuseriot@gmail.com'
+        self.config['EMAIL']['to'] = 'delattreb@gmail.com'
+        self.config['EMAIL']['password'] = 'pythonuser'
+        
         # WEBServices
         self.config['WEBSERVICES'] = {}
         self.config['WEBSERVICES']['name'] = 'NAS WebServices'

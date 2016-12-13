@@ -7,7 +7,7 @@ Date : 09/12/2016
 import os
 
 from dal import dal_dht22
-from lib import com_config, com_logger, com_sqlite
+from lib import com_config, com_email, com_logger, com_sqlite
 
 
 class ExportData:
@@ -43,13 +43,21 @@ class ExportData:
             file.write('Date,Capteur,Temperature,Humidite\n')
             file.close()
         
-        file = open(self.config['EXPORT']['file'], 'a+')
-        for row in rows:
-            file.write(row[0] + ',' + row[1] + ',' + str(row[2]) + ',' + str(row[3]) + '\n')
-        file.close()
-        self.logger.info('Export done: ' + self.config['EXPORT']['file'])
+        if rows:
+            file = open(self.config['EXPORT']['file'], 'a+')
+            for row in rows:
+                file.write(row[0] + ',' + row[1] + ',' + str(row[2]) + ',' + str(row[3]) + '\n')
+            file.close()
+            self.logger.info('Export done: ' + self.config['EXPORT']['file'])
         
         # Create ast entry
-        file = open(self.config['EXPORT']['lastexport'], 'w')
-        file.write(lastdatarows[0][0])
-        file.close()
+        if lastdatarows[0][0]:
+            file = open(self.config['EXPORT']['lastexport'], 'w')
+            file.write(lastdatarows[0][0])
+            file.close()
+        
+        # Send mail if no new record
+        if not rows:
+            mail = com_email.Mail()
+            table = ['Since:' + lastdate]
+            mail.send_mail_gmail('Temp Hum: No DATA', table)
