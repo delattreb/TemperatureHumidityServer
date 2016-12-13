@@ -97,7 +97,7 @@ class XMLRPCServiceDescriptor(ServiceDescriptor):
 
             return type_name
 
-        elif type_name in ['list', 'tuple', 'set']:
+        elif type_name in ['list', 'tuple', 'refreshdata']:
 
             return 'array'
 

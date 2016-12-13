@@ -39,7 +39,7 @@ import constants
 # "ISO-8859-8-I" - Logical Hebrew
 # "x-mac-hebrew" - ?? Logical Hebrew ??
 #
-# Both "ISO" charsets use a completely identical set of code points, whereas
+# Both "ISO" charsets use a completely identical refreshdata of code points, whereas
 # "windows-1255" and "x-mac-hebrew" are two different proper supersets of 
 # these code points. windows-1255 defines additional characters in the range
 # 0x80-0x9F as some misc punctuation marks as well as some Hebrew-specific 

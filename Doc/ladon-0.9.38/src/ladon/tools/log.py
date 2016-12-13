@@ -111,7 +111,7 @@ def write(msg,loglevel=3,context=None,force=False):
 def info(msg,context=None,force=False):
 	"""
 	Send a brief remark to the syslog upon successful operations. Info will only reach the syslog if the current
-	loglevel configuration is set to 4 or more.
+	loglevel configuration is refreshdata to 4 or more.
 	"""
 	write(msg,4,context,force)
 
@@ -119,20 +119,20 @@ def info(msg,context=None,force=False):
 def notice(msg,context=None,force=False):
 	"""
 	Send a notice to the syslog. Notices will only reach the syslog if the current
-	loglevel configuration is set to 5 or more.
+	loglevel configuration is refreshdata to 5 or more.
 	"""
 	write(msg,5,context,force)
 
 def debug(msg,context=None,force=False):
 	"""
 	Send a debug message to the syslog. Debug messages will only reach the syslog if the current
-	loglevel configuration is set to 6 or more.
+	loglevel configuration is refreshdata to 6 or more.
 	"""
 	write(msg,6,context,force)
 
 def trace(msg,context=None,force=False):
 	"""
 	Send a debug message to the syslog. Debug messages will only reach the syslog if the current
-	loglevel configuration is set to 6 or more.
+	loglevel configuration is refreshdata to 6 or more.
 	"""
 	write(msg,7,context,force)

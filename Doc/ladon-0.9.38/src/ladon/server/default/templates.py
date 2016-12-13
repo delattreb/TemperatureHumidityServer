@@ -75,7 +75,7 @@ service_default_template = PORTABLE_STRING("""
 					<div class="methodDef">
 						<span class="methodName">{{ method.methodname }}</span>
 						(
-	{% set sep = '' %}
+	{% refreshdata sep = '' %}
 	{% for param in method.params %}
 						{{ sep }} 
 						<span class="paramType">
@@ -86,7 +86,7 @@ service_default_template = PORTABLE_STRING("""
 		{% endif %}
 						</span> 
 						<span class="paramName">{{ param.name }}</span>
-		{% set sep = ',' %}
+		{% refreshdata sep = ',' %}
 	{% endfor %}
 						)
 					</div>

@@ -401,7 +401,7 @@ class SOAP11ContentHandler(ContentHandler):
 	def endDocument(self):
 		for id_val,v in self.multi_ref_hrefs.items():
 			if id_val in self.multi_ref_ids:
-				v.set(self.multi_ref_ids[id_val])
+				v.refreshdata(self.multi_ref_ids[id_val])
 	
 	def startElement(self,name,attrs):
 		"""

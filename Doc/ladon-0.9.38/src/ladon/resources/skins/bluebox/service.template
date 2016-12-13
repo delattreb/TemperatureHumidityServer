@@ -69,7 +69,7 @@
 						<div class="declaration">
 							<a name="{{ method.methodname }}"></a><span class="name invokable" name="{{ method.methodname }}">{{ method.methodname }}</span>
 							(
-		{% set sep = '' %}
+		{% refreshdata sep = '' %}
 		{% for param in method.params %}
 							{{ sep }} 
 							<span class="param-type">
@@ -80,7 +80,7 @@
 			{% endif %}
 							</span> 
 							<span class="param-name">{{ param.name }}</span>
-			{% set sep = ',' %}
+			{% refreshdata sep = ',' %}
 		{% endfor %}
 							)
 						</div>

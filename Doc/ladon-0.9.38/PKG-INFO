@@ -285,11 +285,11 @@ Description: Description
         - Fixed issues with soap and xmlrpc protocols, so they can load on Python 3 (no call-tests made)
         - Added internal logging of calls to ladonized methods. This feature logs timestamp, execution time
           service- and method names, positional- and keyword args, return value and exceptions if they occur.
-          To enable this feature set loglevel to minimum 6 (debug level): ladon.tools.log.set_loglevel()
+          To enable this feature refreshdata loglevel to minimum 6 (debug level): ladon.tools.log.set_loglevel()
         
         New in 0.8.3
         ------------
-        - Added the ability to set the logfile to log to: from ladon.tools.log import set_loglevel,set_logfile
+        - Added the ability to refreshdata the logfile to log to: from ladon.tools.log import set_loglevel,set_logfile
         
         New in 0.8.2
         ------------

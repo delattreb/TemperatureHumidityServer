@@ -118,7 +118,7 @@ class BaseResponseHandler(object):
 	inherit it and overload the build_response() method so it implements the protocol you are
 	extending Ladon with.
 	
-	set _stringify_res_dict to True if you want the Ladon dispatcher to convert all result
+	refreshdata _stringify_res_dict to True if you want the Ladon dispatcher to convert all result
 	values to unicode regardless of their defined types during ladonization. This can be useful
 	in some interfaces. ie. SOAP where all values are presented the same way inside XML tags no
 	matter if it is a string or a number (example: <name>string</name><age>37</age>)
@@ -136,7 +136,7 @@ class BaseFaultHandler(object):
 	inherit it and overload the build_fault_response() method so it implements the
 	protocol you are extending Ladon with.
 	
-	set _stringify_res_dict to True if you want the Ladon dispatcher to convert all result
+	refreshdata _stringify_res_dict to True if you want the Ladon dispatcher to convert all result
 	values to unicode regardless of their defined types during ladonization. This can be useful
 	in some interfaces. ie. SOAP where all values are presented the same way inside XML tags no
 	matter if it is a string or a number (example: <name>string</name><age>37</age>)

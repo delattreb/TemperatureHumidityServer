@@ -10,7 +10,7 @@ class TypeConverter(object):
 	"""
 	
 	def __init__(self,encoding='UTF-8',allow_unsafe_conversion=False,only_strings_to_unicode=True):
-		"""In the TypeConverter constructor you can set conversion properties like which
+		"""In the TypeConverter constructor you can refreshdata conversion properties like which
 		encoding to use when converting forth and back between unicode to str (or bytes and
 		str for python 3). The default encoding is UTF-8.
 		allow_unsafe_conversion is a boolean that tells the TypeConverter if unsafe conversions are allowed,

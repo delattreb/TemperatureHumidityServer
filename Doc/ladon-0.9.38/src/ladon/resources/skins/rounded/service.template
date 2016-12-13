@@ -62,7 +62,7 @@
 						<div class="declaration">
 							<a name="{{ method.methodname }}"></a><span class="name">{{ method.methodname }}</span>
 							(
-		{% set sep = '' %}
+		{% refreshdata sep = '' %}
 		{% for param in method.params %}
 							{{ sep }} 
 							<span class="param-type">
@@ -73,7 +73,7 @@
 			{% endif %}
 							</span> 
 							<span class="param-name">{{ param.name }}</span>
-			{% set sep = ',' %}
+			{% refreshdata sep = ',' %}
 		{% endfor %}
 							)
 						</div>
@@ -142,17 +142,17 @@
 									{{ v.type }}
 			{% endif %}
 								</span>
-			{% set prefix = '[' %}
-			{% set suffix = '' %}
+			{% refreshdata prefix = '[' %}
+			{% refreshdata suffix = '' %}
 			{% if 'nullable' in v.props and v.props.nullable==True %}
 								{{ prefix }} Nullable
-				{% set prefix = ' |' %}
-				{% set suffix = ' ]' %}
+				{% refreshdata prefix = ' |' %}
+				{% refreshdata suffix = ' ]' %}
 			{% endif %}
 			{% if 'default' in v.props %}
 								{{ prefix }} default: {{ v.props.default }}
-				{% set prefix = ' | ' %}
-				{% set suffix = ' ]' %}
+				{% refreshdata prefix = ' | ' %}
+				{% refreshdata suffix = ' ]' %}
 			{% endif %}
 			{{ suffix }}
 			{% if 'doc' in v.props %}

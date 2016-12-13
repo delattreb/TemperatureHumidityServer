@@ -46,12 +46,12 @@ class ThreadAcquisitionDHT22(threading.Thread):
             cursor = connection.cursor()
             
             if cptws >= self.delayws:
-                instance.setws(self.name)
+                instance.recorddata(self.name, connection, cursor)
                 instance.progressbarwsoff(l)
                 cptws = 0
             
             if cpt >= self.delayread:
-                instance.set(self.name, connection, cursor)
+                instance.read()
                 instance.progressbarreadoff(l)
                 cpt = 0
             cpt += 1

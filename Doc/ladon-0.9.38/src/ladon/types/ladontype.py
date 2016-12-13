@@ -224,7 +224,7 @@ class LadonType(object):
 						# Attribute is not nullable
 						raise NeedToDefineParseTimeException('Attribute "%s" (class: "%s") is not nullable' % (attr_name,(self.__class__)))
 				elif isinstance(attr_val,dict) and props.get('type')==attr_type:
-					# Attribute is dictionary type defined and untouched set default value
+					# Attribute is dictionary type defined and untouched read default value
 					# if available.
 					attr_val = props.get('default')
 					if attr_val==None and props.get('nullable')!=True:
