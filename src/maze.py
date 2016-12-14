@@ -7,8 +7,8 @@
 #    https://github.com/rm-hull/maze/blob/master/src/maze/generator.clj
 
 import time
-from lib.oled.demo_opts import device
-from lib.oled.render import canvas
+from oled.demo_opts import device
+from oled.render import canvas
 from random import randrange
 
 NORTH = 1
@@ -29,7 +29,7 @@ class Maze(object):
 
     def coords(self, offset):
         """ Converts offset to [x,y] co-ords """
-        return (offset % self.width, offset // self.width)
+        return offset % self.width, offset // self.width
 
     def neighbours(self, pos):
         neighbours = []
