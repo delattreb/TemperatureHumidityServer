@@ -260,12 +260,14 @@ class DHT22:
         time.sleep(0.2)
         self.powered = True
         
-        # Inssert into database
-        dal = dal_dht22.DAL_DHT22(connection, cursor)
-        dal.set_dht22(name, self.temperature(), self.humidity())
-        # Call WebServices
-        client = clientwebservices.ClientWebServices()
-        client.inserttemphum(name, self.temperature(), self.humidity())
+        if self.temperature() != -999 and self.humidity() != -999:
+            # Inssert into database
+            dal = dal_dht22.DAL_DHT22(connection, cursor)
+            dal.set_dht22(name, self.temperature(), self.humidity())
+            
+            # Call WebServices
+            client = clientwebservices.ClientWebServices()
+            client.inserttemphum(name, self.temperature(), self.humidity())
     
     def read(self):
         self.trigger()
