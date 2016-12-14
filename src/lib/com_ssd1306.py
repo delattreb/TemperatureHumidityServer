@@ -4,6 +4,8 @@ Auteur: Bruno DELATTRE
 Date : 12/08/2016
 """
 
+import math
+
 from PIL import ImageFont
 
 from lib import com_logger
@@ -55,16 +57,16 @@ class SSD1306:
         if SMBus is not None:
             self.oled.cls()
     
-    def text(self, x, y, text, fontHeight):
+    def text(self, x, y, text, fontheight):
         if SMBus is not None:
             draw = self.oled.canvas
-            if fontHeight == self.SMALL_FONT:
+            if fontheight == self.SMALL_FONT:
                 draw.text((x, y), text, font = self.__smallFont, fill = 1)
             
-            if fontHeight == self.DEFAULT_FONT:
+            if fontheight == self.DEFAULT_FONT:
                 draw.text((x, y), text, font = self.__defaultFont, fill = 1)
             
-            if fontHeight == self.STRONG_FONT:
+            if fontheight == self.STRONG_FONT:
                 draw.text((x, y), text, font = self.__bigFont, fill = 1)
     
     def rectangle(self, x, y, width, height):
@@ -127,3 +129,33 @@ class SSD1306:
                         (x + interiormini, index, x + width - interiormini, index - thickness),
                         outline = 0, fill = 1)
                     index -= (thickness + space)
+                   
+    
+    def progresscircle(self, x, y, radius, thickness, maxsegments, segments, startangle, totalangle, direction):
+        anglechange = (totalangle / maxsegments) * (math.pi / 180)
+        i = startangle * (math.pi / 180)
+        
+        ax = x + (math.cos(i) * radius)
+        ay = y - (math.sin(i) * radius)
+        
+        bx = x + (math.cos(i) * (radius + thickness))
+        by = y - (math.sin(i) * (radius + thickness))
+        
+        for cpt in range(segments):  # for optimisation last process cpt is last value to segments new value
+            i += direction * anglechange
+            
+            cx = x + (math.cos(i) * radius)
+            cy = y - (math.sin(i) * radius)
+            
+            dx = x + (math.cos(i) * (radius + thickness))
+            dy = y - (math.sin(i) * (radius + thickness))
+            
+            # TODO one only
+            self.oled.canvas.polygon((ax, ay, bx, by, dx, dy), fill = 1, outline = 1)  # Color 1
+            # self.oled.canvas.polygon((ax, ay, cx, cy, dx, dy), fill = 1, outline = 1)  # Color 2
+            
+            ax = cx
+            ay = cy
+            
+            bx = dx
+            by = dy

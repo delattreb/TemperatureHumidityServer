@@ -45,19 +45,19 @@ class ThreadAcquisitionDHT22(threading.Thread):
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
             
-            if cptws >= self.delayws:
+            if cptws > self.delayws:
                 instance.recorddata(self.name, connection, cursor)
                 instance.progressbarwsoff(l)
                 cptws = 0
             
-            if cpt >= self.delayread:
+            if cpt > self.delayread:
                 instance.read()
                 instance.progressbarreadoff(l)
                 cpt = 0
-            cpt += 1
-            cptws += 1
             
             instance.refreshlcd(l, cpt, self.delayread, cptws, self.delayws)
+            cpt += 1
+            cptws += 1
             self.lock.release()
             
             self.counter -= 1

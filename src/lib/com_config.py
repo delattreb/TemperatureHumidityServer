@@ -22,7 +22,7 @@ class Config:
         # Version
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'TemperatureHumidity'
-        self.config['APPLICATION']['version'] = '1.0.0'
+        self.config['APPLICATION']['version'] = '1.1.3'
         self.config['APPLICATION']['author'] = 'c' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
         
@@ -50,7 +50,7 @@ class Config:
         
         # LOGGER
         self.config['LOGGER'] = {}
-        self.config['LOGGER']['levelconsole'] = '10'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
+        self.config['LOGGER']['levelconsole'] = '20'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
         self.config['LOGGER']['levelfile'] = '30'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'

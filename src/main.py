@@ -23,8 +23,9 @@ logger.info('Application start')
 lcd = lcd.LCD()
 
 # LCD Splash
-lcd.splash(int(config['APPLICATION']['splashduration']))
-lcd.displayoff()
+if int(config['LOGGER']['levelconsole']) > 10:
+    lcd.splash(int(config['APPLICATION']['splashduration']))
+    lcd.displayoff()
 
 # Create new threads
 threadlock = threading.Lock()
@@ -47,6 +48,6 @@ dht22_thread_int.start()
 # ds18b20_thread_int.join()
 dht22_thread_int.join()
 
-logger.info('Application stop')
-#gpio = com_gpio_inout.GPIOINOT()
-#gpio.cleanup()
+# logger.info('Application stop')
+gpio = com_gpio_inout.GPIOINOT()
+gpio.cleanup()

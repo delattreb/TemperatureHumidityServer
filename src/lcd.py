@@ -11,22 +11,24 @@ from lib import com_config, com_ssd1306
 
 class LCD:
     def __init__(self):
-        conf=com_config.Config()
-        self.config=conf.getconfig()
-        self.lcd=com_ssd1306.SSD1306()
+        conf = com_config.Config()
+        self.config = conf.getconfig()
+        self.lcd = com_ssd1306.SSD1306()
     
     def displayoff(self):
         self.lcd.offscreen()
     
     def splash(self, duration):
         self.lcd.clear()
-        self.lcd.rectangle(0, 0, self.lcd.width_max-1, self.lcd.height_max-1)
+        self.lcd.rectangle(0, 0, self.lcd.width_max - 1, 45)
         self.lcd.text(2, 3, self.config['APPLICATION']['name'], 1)
-        self.lcd.text(7, 21, 'v'+self.config['APPLICATION']['version'], 1)
-        self.lcd.text(4, 48, self.config['APPLICATION']['author'], 0)
+        self.lcd.text(5, 18, 'v' + self.config['APPLICATION']['version'], 0)
+        self.lcd.text(5, 32, self.config['APPLICATION']['author'], 0)
         
-        self.lcd.display()
-        time.sleep(duration)
+        for i in range(19):
+            self.lcd.progessbar(0, 53, 127, 10, i, 18, 5, 2, 4, True)
+            self.lcd.display()
+            time.sleep(0.35)
     
     def progressbarreadoff(self):
         self.lcd.rectangleclear(0, 3, 8, 61)
