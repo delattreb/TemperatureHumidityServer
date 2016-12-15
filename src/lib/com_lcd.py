@@ -5,7 +5,9 @@ Date : 13/11/2016
 """
 
 import math
-import time
+import os
+
+from PIL import ImageFont
 
 from lib import com_config
 from oled.demo_opts import device
@@ -17,9 +19,9 @@ class LCD:
         conf = com_config.Config()
         self.config = conf.getconfig()
         self.surface = canvas(device)
-    
-    def __delete__(self, instance):
-        pass
+        font_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                 'fonts', 'FreeMonoBold.ttf'))
+        self.smallfont = ImageFont.truetype(font_path, 10)
     
     def clear(self):
         self.surface.device.clear()
