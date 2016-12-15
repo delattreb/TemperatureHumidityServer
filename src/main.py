@@ -9,6 +9,7 @@ import threading
 from acquisition import thread_acquisition_dht22
 from lib import com_config, com_gpio_inout, com_lcd, com_logger
 
+
 # Config
 conf = com_config.Config()
 conf.setconfig()
@@ -35,10 +36,9 @@ threadlock = threading.Lock()
 
 
 # TODO : Start pigpiod
-dht22_thread_int = thread_acquisition_dht22.ThreadAcquisitionDHT22(config['GPIO']['DHT22_INTERIOR_NAME'], threadlock,
-                                                                   int(config['GPIO']['DHT22_INTERIOR_PORT']), int(config['GPIO']['DHT22_INTERIOR_delay']),
-                                                                   int(config['GPIO']['DHT22_INTERIOR_delayread']), int(config['GPIO']['DHT22_INTERIOR_delayws']),
-                                                                   int(config['GPIO']['DHT22_INTERIOR_nb']), int(config['GPIO']['LED_ACQUISITION']), True)
+dht22_thread_int = thread_acquisition_dht22.ThreadAcquisitionDHT22(config['GPIO']['DHT22_INTERIOR_NAME'], threadlock, int(config['GPIO']['DHT22_INTERIOR_PORT']), int(config['GPIO']['DHT22_INTERIOR_delay']),
+                                                                   int(config['GPIO']['DHT22_INTERIOR_delayread']), int(config['GPIO']['DHT22_INTERIOR_delayws']), int(config['GPIO']['DHT22_INTERIOR_nb']),
+                                                                   int(config['GPIO']['LED_ACQUISITION']), True)
 
 # ds18b20_thread_int.start()
 dht22_thread_int.start()
