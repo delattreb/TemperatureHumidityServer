@@ -6,9 +6,8 @@ Date : 07/08/2016
 
 import threading
 
-import lcd
 from acquisition import thread_acquisition_dht22
-from lib import com_config, com_gpio_inout, com_logger
+from lib import com_config, com_gpio_inout, com_lcd, com_logger
 
 # Config
 conf = com_config.Config()
@@ -20,12 +19,12 @@ logger = com_logger.Logger()
 logger.info('Application start')
 
 # LCD
-lcd = lcd.LCD()
+lcd = com_lcd.LCD()
 
-# LCD Splash
+# LCD Splash (not display if debug mode)
 if int(config['LOGGER']['levelconsole']) > 10:
+    logger.info('Splash screen')
     lcd.splash(int(config['APPLICATION']['splashduration']))
-    lcd.displayoff()
 
 # Create new threads
 threadlock = threading.Lock()

@@ -242,18 +242,6 @@ class DHT22:
             self.cb.cancel()
             self.cb = None
     
-    def refreshlcd(self, lcd, cptread, delayread, cptws, delayws):
-        # Display info on LCD
-        lcd.displaysensor(self.temperature(), self.humidity(), cptread, delayread, cptws, delayws)
-    
-    @staticmethod
-    def progressbarreadoff(lcd):
-        lcd.progressbarreadoff()
-    
-    @staticmethod
-    def progressbarwsoff(lcd):
-        lcd.progressbarwsoff()
-    
     def recorddata(self, name, connection, cursor):
         self.powered = False
         self.trigger()
@@ -276,3 +264,5 @@ class DHT22:
         # Log
         logger = com_logger.Logger('DHT22')
         logger.debug('Read Temp: ' + str(self.temperature())[:4] + ' Hum: ' + str(self.humidity())[:4])
+        
+        return self.temperature(), self.humidity()

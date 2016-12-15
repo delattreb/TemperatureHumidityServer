@@ -8,8 +8,7 @@ import sqlite3
 import threading
 import time
 
-import lcd
-from lib import com_config, com_dht22, com_logger
+from lib import com_config, com_dht22, com_lcd, com_logger
 
 
 class ThreadAcquisitionDHT22(threading.Thread):
@@ -36,28 +35,30 @@ class ThreadAcquisitionDHT22(threading.Thread):
     
     def gettemphum(self):
         instance = com_dht22.DHT22(self.port, self.ledport)
-        l = lcd.LCD()
+        lcd = com_lcd.LCD()
         cpt = 0
         cptws = 0
+        temp = 0
+        hum = 0
         while self.counter or self.infiny:
             self.lock.acquire()
             
+            # Database connection
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
             
             if cptws > self.delayws:
                 instance.recorddata(self.name, connection, cursor)
-                instance.progressbarwsoff(l)
                 cptws = 0
             
             if cpt > self.delayread:
-                instance.read()
-                instance.progressbarreadoff(l)
+                temp, hum = instance.read()
                 cpt = 0
             
-            instance.refreshlcd(l, cpt, self.delayread, cptws, self.delayws)
+            lcd.displaysensor(temp, hum, cpt, self.delayread, cptws, self.delayws)
             cpt += 1
             cptws += 1
+            
             self.lock.release()
             
             self.counter -= 1
