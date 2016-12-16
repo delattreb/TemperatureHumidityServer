@@ -21,7 +21,7 @@ class Config:
         # region Config
         # Version
         self.config['APPLICATION'] = {}
-        self.config['APPLICATION']['name'] = 'TemperatureHumidity'
+        self.config['APPLICATION']['name'] = 'Temperature/Humidity'
         self.config['APPLICATION']['version'] = '1.1.3'
         self.config['APPLICATION']['author'] = 'c' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
@@ -38,11 +38,8 @@ class Config:
         self.config['WEBSERVICES']['description'] = 'NAS WebServices'
         self.config['WEBSERVICES']['version'] = '1.1.0'
         self.config['WEBSERVICES']['port'] = '9090'
-        self.config['WEBSERVICES']['url'] = 'http://mycube.dscloud.me:' + self.config['WEBSERVICES']['port']
+        self.config['WEBSERVICES']['url'] = '192.168.1.15'
         self.config['WEBSERVICES']['logfile'] = 'webservices.log'
-        self.config['WEBSERVICES']['logfilesize'] = '50000'
-        self.config['WEBSERVICES']['logbackupcount'] = '50'
-        self.config['WEBSERVICES']['loglevel'] = '4'
         
         # Acquisition
         self.config['ACQUISITION'] = {}
@@ -50,7 +47,7 @@ class Config:
         
         # LOGGER
         self.config['LOGGER'] = {}
-        self.config['LOGGER']['levelconsole'] = '20'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
+        self.config['LOGGER']['levelconsole'] = '10'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
         self.config['LOGGER']['levelfile'] = '30'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'

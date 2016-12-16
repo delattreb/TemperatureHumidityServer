@@ -6,7 +6,7 @@ Acquisition on Raspberry Pi.
 Read temperature and humidity on DHT2 sensor.
 Insert by Web services.
 
-Display temperature and humidity on LCd screen 128x64.
+Display temperature and humidity on LCD screen 128x64.
 
 
 
