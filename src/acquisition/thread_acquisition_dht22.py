@@ -61,5 +61,6 @@ class ThreadAcquisitionDHT22(threading.Thread):
             
             self.lock.release()
             
-            self.counter -= 1
+            if not self.infiny:
+                self.counter -= 1
             time.sleep(self.delay)

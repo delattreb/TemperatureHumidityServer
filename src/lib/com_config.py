@@ -32,15 +32,6 @@ class Config:
         self.config['EMAIL']['to'] = 'delattreb@gmail.com'
         self.config['EMAIL']['password'] = 'pythonuser'
         
-        # WEBServices
-        self.config['WEBSERVICES'] = {}
-        self.config['WEBSERVICES']['name'] = 'NAS WebServices'
-        self.config['WEBSERVICES']['description'] = 'NAS WebServices'
-        self.config['WEBSERVICES']['version'] = '1.1.0'
-        self.config['WEBSERVICES']['port'] = '9090'
-        self.config['WEBSERVICES']['url'] = '192.168.1.15'
-        self.config['WEBSERVICES']['logfile'] = 'webservices.log'
-        
         # Acquisition
         self.config['ACQUISITION'] = {}
         self.config['ACQUISITION']['trigger'] = '5'
@@ -48,7 +39,7 @@ class Config:
         # LOGGER
         self.config['LOGGER'] = {}
         self.config['LOGGER']['levelconsole'] = '10'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
-        self.config['LOGGER']['levelfile'] = '30'
+        self.config['LOGGER']['levelfile'] = '10'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'
         
