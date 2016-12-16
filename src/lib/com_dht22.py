@@ -5,7 +5,6 @@ import pigpio
 
 from dal import dal_dht22
 from lib import com_logger
-from webservices import clientwebservices
 
 
 class DHT22:
@@ -252,10 +251,6 @@ class DHT22:
             # Inssert into database
             dal = dal_dht22.DAL_DHT22(connection, cursor)
             dal.set_dht22(name, self.temperature(), self.humidity())
-            
-            # Call WebServices
-            client = clientwebservices.ClientWebServices()
-            client.inserttemphum(name, self.temperature(), self.humidity())
     
     def read(self):
         self.trigger()
