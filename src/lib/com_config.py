@@ -22,7 +22,7 @@ class Config:
         # Version
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'Temperature/Humidity'
-        self.config['APPLICATION']['version'] = '1.1.3'
+        self.config['APPLICATION']['version'] = '1.1.4'
         self.config['APPLICATION']['author'] = 'c' + ' Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
         
