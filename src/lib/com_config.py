@@ -64,7 +64,7 @@ class Config:
         self.config['GPIO']['DHT22_INTERIOR_PORT'] = '23'
         self.config['GPIO']['DHT22_INTERIOR_POWERPORT'] = '22'
         self.config['GPIO']['DHT22_INTERIOR_delay'] = '1'
-        self.config['GPIO']['DHT22_INTERIOR_delayws'] = '15'  # 360 = 6 minutes
+        self.config['GPIO']['DHT22_INTERIOR_delayws'] = '360'  # 360 = 6 minutes
         self.config['GPIO']['DHT22_INTERIOR_delayread'] = '6'
         self.config['GPIO']['DHT22_INTERIOR_nb'] = str(int(((acquisitionduration * 3600) / float(self.config['GPIO']['DHT22_INTERIOR_delay']))))
         
