@@ -35,7 +35,8 @@ class LCD:
                 self.progressbarline(draw, 0, 53, 127, 10, i, 127, 2)
             i += 1
     
-    def progressbarline(self, draw, x, y, width, height, value, max_value, interior = 2):
+    @staticmethod
+    def progressbarline(draw, x, y, width, height, value, max_value, interior = 2):
         # with canvas(device) as draw:
         interiormini = interior / 2
         
@@ -51,7 +52,8 @@ class LCD:
             cal = round((((height - interior) * value) / max_value), 0)
             draw.rectangle((x + interiormini, y + height - interiormini, x + width - interiormini, y + (height - cal) - interiormini), outline = 0, fill = 1)
     
-    def progressbar(self, draw, x, y, width, height, value, max_value, thickness, space, interior = 2, border = True):
+    @staticmethod
+    def progressbar(draw, x, y, width, height, value, max_value, thickness, space, interior = 2, border = True):
         interiormini = interior / 2
         
         # Exterior progressbar
@@ -75,7 +77,8 @@ class LCD:
                 draw.rectangle((x + interiormini, index, x + width - interiormini, index - thickness), outline = 0, fill = 1)
                 index -= (thickness + space)
     
-    def progresscircle(self, draw, x, y, radius, thickness, maxsegments, segments, startangle, totalangle, direction):
+    @staticmethod
+    def progresscircle(draw, x, y, radius, thickness, maxsegments, segments, startangle, totalangle, direction):
         anglechange = (totalangle / maxsegments) * (math.pi / 180)
         i = startangle * (math.pi / 180)
         
