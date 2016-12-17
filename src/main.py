@@ -7,8 +7,8 @@ Date : 07/08/2016
 import threading
 
 from acquisition import thread_acquisition_dht22
-from lib import com_config, com_gpio_inout, com_lcd, com_logger
-
+from lib import com_config, com_lcd, com_logger
+from lib.driver import com_gpio_inout
 
 # Config
 conf = com_config.Config()

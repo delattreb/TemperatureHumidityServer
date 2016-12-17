@@ -10,8 +10,8 @@ import os
 from PIL import ImageFont
 
 from lib import com_config
-from oled.demo_opts import device
-from oled.render import canvas
+from lib.driver.oled.demo_opts import device
+from lib.driver.oled.render import canvas
 
 
 class LCD:
