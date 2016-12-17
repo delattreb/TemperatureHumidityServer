@@ -101,3 +101,4 @@ ENV/
 src/export/data.csv
 src/export/~$Rapport Temperature Humidity.xlsx
 /src/databasecopy.db
+/src/export/lastexport.csv
