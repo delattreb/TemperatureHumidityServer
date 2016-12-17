@@ -23,7 +23,7 @@ class LCD:
         self.normalfont = ImageFont.truetype(font_path, 14)
         self.bigfont = ImageFont.truetype(font_path, 27)
     
-    def splash(self, duration):
+    def splash(self):
         i = 0
         while i <= 127:
             with canvas(device) as draw:
