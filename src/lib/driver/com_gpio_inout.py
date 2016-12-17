@@ -6,14 +6,15 @@ Date : 07/08/2016
 
 import time
 
-from lib import com_config, com_gpio, com_logger
+from lib import com_config, com_logger
+from lib.driver import com_gpio
 
 
 class GPIOINOT:
     def __init__(self):
         self.gpio = com_gpio.GPIODialog('LED ACQUISITION')
         self.gpio.setmodebcm()
-
+        
         conf = com_config.Config()
         self.config = conf.getconfig()
         

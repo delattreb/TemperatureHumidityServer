@@ -10,8 +10,8 @@ import os
 from PIL import ImageFont
 
 from lib import com_config
-from oled.demo_opts import device
-from oled.render import canvas
+from lib.driver.oled.demo_opts import device
+from lib.driver.oled.render import canvas
 
 
 class LCD:
@@ -23,7 +23,7 @@ class LCD:
         self.normalfont = ImageFont.truetype(font_path, 14)
         self.bigfont = ImageFont.truetype(font_path, 27)
     
-    def splash(self, duration):
+    def splash(self):
         i = 0
         while i <= 127:
             with canvas(device) as draw:
