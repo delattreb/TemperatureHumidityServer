@@ -44,7 +44,7 @@ def primitives(draw):
 
 
 def main():
-    print("Testing basic surface graphics...")
+    print("Testing basic canvas graphics...")
     for _ in range(2):
         with canvas(device) as draw:
             primitives(draw)

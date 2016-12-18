@@ -7,7 +7,7 @@ Date : 13/11/2016
 import math
 import os
 
-from PIL import ImageFont
+from PIL import Image, ImageFont
 
 from lib import com_config
 from lib.driver.oled.demo_opts import device
@@ -18,7 +18,17 @@ class LCD:
     def __init__(self):
         conf = com_config.Config()
         self.config = conf.getconfig()
-        font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'FreeSans.ttf'))
+        
+        font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../fonts', 'FreeSans.ttf'))
+        
+        img_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images', 'tempicone.png'))
+        self.tempicone = Image.open(img_path).transform(device.size, Image.AFFINE, (1, 0, 0, 0, 1, 0), Image.BILINEAR) \
+            .convert(device.mode)
+        
+        img_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images', 'humicone.png'))
+        self.humicone = Image.open(img_path).transform(device.size, Image.AFFINE, (1, 0, 0, 0, 1, 0), Image.BILINEAR) \
+            .convert(device.mode)
+        
         self.smallfont = ImageFont.truetype(font_path, 10)
         self.normalfont = ImageFont.truetype(font_path, 14)
         self.bigfont = ImageFont.truetype(font_path, 27)
@@ -110,11 +120,13 @@ class LCD:
     def displaysensor(self, temp, hum, cptread, delayread, cptws, delayws):
         with canvas(device) as draw:
             # DHT22
-            draw.text((25, 16), 'Temp', fill = "white", font = self.smallfont)
+            draw.bitmap((34, 0), self.tempicone, fill = "white")
+            # draw.text((25, 16), 'Temp', fill = "white", font = self.smallfont)
             draw.text((60, 1), str(temp)[:4], fill = "white", font = self.bigfont)
             draw.text((117, 1), '°', fill = "white", font = self.normalfont)
             
-            draw.text((25, 52), 'Hum', fill = "white", font = self.smallfont)
+            draw.bitmap((30, 39), self.humicone, fill = "white")
+            # draw.text((25, 52), 'Hum', fill = "white", font = self.smallfont)
             draw.text((60, 38), str(hum)[:4], fill = "white", font = self.bigfont)
             draw.text((115, 47), '%', fill = "white", font = self.normalfont)
             
@@ -124,8 +136,8 @@ class LCD:
             # self.lcd.line(23, 0, 23, 63, 1)
             
             # Draw progressbar
-            draw.line((1, 4, 7, 4), 1)
-            draw.line((13, 4, 19, 4), 1)
+            draw.line((1, 0, 7, 0), 1)
+            draw.line((13, 0, 19, 0), 1)
             
-            self.progressbar(draw, 0, 3, 8, 61, cptread, delayread, 8, 2, 0, False)
-            self.progressbar(draw, 12, 3, 8, 61, cptws, delayws, 8, 2, 0, False)
+            self.progressbar(draw, 0, 0, 8, 61, cptread, delayread, 8, 2, 0, False)
+            self.progressbar(draw, 12, 0, 8, 61, cptws, delayws, 8, 2, 0, False)

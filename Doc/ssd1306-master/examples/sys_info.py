@@ -20,7 +20,7 @@ from demo_opts import device
 from oled.render import canvas
 from PIL import ImageFont
 
-# TODO: custom fonts bitmaps for up/down arrows
+# TODO: custom font bitmaps for up/down arrows
 # TODO: Load histogram
 
 
@@ -69,7 +69,7 @@ def network(iface):
 
 
 def stats(oled):
-    # use custom fonts
+    # use custom font
     font_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                 'fonts', 'C&C Red Alert [INET].ttf'))
     font2 = ImageFont.truetype(font_path, 12)
