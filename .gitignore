@@ -15,6 +15,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+.idea/
 lib/
 lib64/
 parts/
@@ -103,3 +104,10 @@ src/export/~$Rapport Temperature Humidity.xlsx
 /src/databasecopy.db
 /src/export/lastexport.csv
 /.idea/
+.idea/dataSources/
+.idea/statistic.xml
+src/export/report.pbix
+src/images/weather/
+/.idea/dataSources.xml
+/.idea/deployment.xml
+/.idea/webServers.xml
