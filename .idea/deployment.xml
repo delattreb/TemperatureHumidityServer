@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Minibian TemperatureHumidity" uploadOnCheckin="db8b8f9b-03be-48da-87af-760808760982" filePermissions="420" folderPermissions="493" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="Minibian TemperatureHumidity">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/project/TemperatureHumidityServer" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="Minibian TemperatureHumidity" />
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
