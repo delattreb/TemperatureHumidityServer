@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Minibian TemperatureHumidity" uploadOnCheckin="db8b8f9b-03be-48da-87af-760808760982" filePermissions="420" folderPermissions="493" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Minibian TemperatureHumidity" uploadOnCheckin="db8b8f9b-03be-48da-87af-760808760982" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;.db" filePermissions="420" folderPermissions="493" autoUploadExternalChanges="true">
     <serverData>
       <paths name="Minibian TemperatureHumidity">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/project/TemperatureHumidityServer" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/project/TemperatureHumidityServer" local="$PROJECT_DIR$/src" web="/" />
           </mappings>
         </serverdata>
       </paths>
