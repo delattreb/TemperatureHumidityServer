@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="db8b8f9b-03be-48da-87af-760808760982" name="Minibian TemperatureHumidity" url="http://192.168.1.14">
-        <fileTransfer host="192.168.1.14" port="22" accessType="SFTP">
+        <fileTransfer host="192.168.1.14" port="22" rootFolder="/home/project/TemperatureHumidityServer" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

@@ -41,27 +41,30 @@ class ThreadAcquisitionDHT22(threading.Thread):
         cptws = 0
         temp = 0
         hum = 0
+        nextacq = time.time()
         while self.counter or self.infiny:
-            self.lock.acquire()
-            
-            # Database connection
-            connection = sqlite3.Connection(self.database)
-            cursor = connection.cursor()
-            
-            if cptws > self.delayws:
-                instance.recorddata(self.name, connection, cursor)
-                cptws = 0
-            
-            if cpt > self.delayread:
-                temp, hum = instance.read()
-                cpt = 0
-            
-            lcd.displaysensor(temp, hum, cpt, self.delayread, cptws, self.delayws)
-            cpt += 1
-            cptws += 1
-            
-            self.lock.release()
-            
-            if not self.infiny:
-                self.counter -= 1
-            time.sleep(self.delay)
+            if time.time() >= nextacq:
+                nextacq += self.delay
+                self.lock.acquire()
+        
+                # Database connection
+                connection = sqlite3.Connection(self.database)
+                cursor = connection.cursor()
+        
+                if cptws > self.delayws:
+                    instance.recorddata(self.name, connection, cursor)
+                    cptws = 0
+        
+                if cpt > self.delayread:
+                    temp, hum = instance.read()
+                    cpt = 0
+        
+                lcd.displaysensor(temp, hum, cpt, self.delayread, cptws, self.delayws)
+                cpt += 1
+                cptws += 1
+        
+                self.lock.release()
+        
+                if not self.infiny:
+                    self.counter -= 1
+            time.sleep(0.1)

@@ -52,7 +52,7 @@ class Config:
         self.config['GPIO'] = {}
         # DHT22
         self.config['GPIO']['DHT22_INTERIOR_NAME'] = 'Sejour'
-        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '16'
+        self.config['GPIO']['DHT22_INTERIOR_PORT'] = '23'
         self.config['GPIO']['DHT22_INTERIOR_POWERPORT'] = '22'
         self.config['GPIO']['DHT22_INTERIOR_delay'] = '1'
         self.config['GPIO']['DHT22_INTERIOR_delayws'] = '360'  # 360 = 6 minutes
